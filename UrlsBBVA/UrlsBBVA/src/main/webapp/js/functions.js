@@ -14,7 +14,7 @@
  */
 $(document).ready(function () {
 
-    $('#example').DataTable({
+    $('#tablaOperaciones').DataTable({
         "pagingType": "full_numbers"
     });
 
@@ -47,14 +47,62 @@ $(document).ready(function () {
 
 
 function consultarPorPeticion() {
+    var obj = new Object();
+    obj.operacion = "pruebaKZML";
+    obj.concepto = "PETICION;XMJN;";
+
     $.ajax({
-        url: "https://www.bancomermovil.com/mbhxp_mx_web/servlet/ServletOperacionWeb?OPERACION=BAN2O05&LOCALE=es_ES&PAR_INICIO.0={%22operacion%22:%22pruebaKZML%22,%22concepto%22:%22PETICION;XMJN;%22}",
         type: 'GET',
+        //url: 'https://www.bancomermovil.com/mbhxp_mx_web/servlet/ServletOperacionWeb?OPERACION=BAN2O05&LOCALE=es_ES&PAR_INICIO.0={"operacion":"pruebaKZML","concepto":"PETICION;XMJN;"}',
+        url: 'https://www.bancomermovil.com/mbhxp_mx_web/servlet/ServletOperacionWeb?OPERACION=BAN2O05&LOCALE=es_ES&PAR_INICIO.0=' + JSON.stringify(obj) + '',
         success: function (data) {
-            console.log(data);
+            console.log("success: " + data);
+            alert(data);
         },
         error: function (data) {
-            console.log(data);
+            console.log("error: " + data);
         }
+    });
+
+}
+
+function consultaPorPeticion() {
+    $.ajaxSetup({
+        async: false
+    });
+
+    var context = $('#contexto').val();
+    var user = $('#usuariotxt').val();
+
+    $.ajax({
+        type: "GET",
+        url: context + '/ServletUrls',
+        data: {
+            opcion: '1',
+            usuariotxt: user
+        },
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+            $('#cuerpotablaOperaciones').remove();
+            var cuerpoT = '<tbody id="cuerpotablaPricipalArchivos">';
+
+            cuerpoT += "<tr><td>" + data.url + "</td>"
+            + "<td class='text-center'>" + data.data + "</td>"
+                    + "<td class='text-center'>" + data.fecha + "</td></tr>";
+
+            $('#tablaOperaciones').append(cuerpoT + '</tbody>');
+            $('#tablaOperaciones').dataTable();
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+        },
+        beforeSend: function (jqXHR, settings) {
+        },
+        complete: function (jqXHR, textStatus) {
+        }
+    });
+
+    $.ajaxSetup({
+        async: true
     });
 }
