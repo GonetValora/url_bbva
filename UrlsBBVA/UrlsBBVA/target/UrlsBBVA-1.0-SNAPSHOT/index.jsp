@@ -107,14 +107,21 @@
                                     <div class="col-md-offset-1">
                                         <input type="hidden" value="1" id="opcion" name="opcion">
                                         <div class="col-md-6">
+                                            <label>Numero de Usuario:</label>
                                             <div class="input-group">
-                                                <span class="input-group-addon" id="basic-addon1"></span>
-                                                <input value="XMJN" id="usuariotxt" name="usuariotxt" type="text" class="form-control" placeholder="Usuario" aria-describedby="basic-addon1">
+                                                <span class="input-group-addon" id=""></span>
+                                                <input value="XMJN" id="usuariotxt" name="usuariotxt" type="text" class="form-control" placeholder="Usuario" aria-describedby="">
+                                            </div>
+                                            <br>
+                                            <label>Numero de Peticiones:</label>
+                                            <div class="input-group col-md-3 col-md-offset-9">
+                                                <span class="input-group-addon" id=""></span>
+                                                <input value="1" min="1" id="selectPeticion" name="selectPeticion" type="number" class="form-control">
                                             </div>
                                             <br>
                                             <div class="form-inline">
-                                                <button onclick="consultaPorPeticion();" type="submit" class="btn btn-success" role="button" >Aceptar</button>
-                                                <button class="btn btn-danger btn-sm" role="button" type="reset">Cancelar</button>
+                                                <button onclick="consultaPorPeticion();" type="submit" class="btn btn-success btn-sm" role="button">Aceptar</button>
+                                                <button onclick="refresh();" type="reset" class="btn btn-danger btn-sm" role="button" >Limpiar</button>
                                             </div>
                                         </div>
                                     </div>
@@ -122,7 +129,7 @@
                                 </div>
                             </div>
 
-                            <div id="usoOtpDiv" class="panel panel-default" style="display: none;">
+                            <div id="usoOtpDiv" class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title"><i class="fa fa-fw fa-delicious"></i> Uso De OTP</h3>
                                 </div>
@@ -130,14 +137,33 @@
 
                                     <form class="col-md-offset-1" action="" method="post">
                                         <div class="col-md-6">
+                                            <label>Llave OTP:</label>
                                             <div class="input-group">
-                                                <span class="input-group-addon" id="basic-addon1">@</span>
-                                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+                                                <span class="input-group-addon" id=""></span>
+                                                <input value="08071052142016430329" name="llaveOTPtxt" id="llaveOTPtxt" type="text" class="form-control" placeholder="Llave OTP" aria-describedby="">
                                             </div>
                                             <br>
+
+                                            <label>Numero de Peticiones:</label>
+                                            <div class="input-group col-md-3 col-md-offset-9">
+                                                <span class="input-group-addon" id=""></span>
+                                                <input value="1" min="1" id="selectOTP" name="selectOTP" type="number" class="form-control">
+                                            </div>
+                                            <br>
+
+                                            <label>Tipo Concepto:</label>
+                                            <div class="input-group col-md-4 col-md-offset-8">
+                                                <select class="form-control" id="selTipo" name="selTipo">
+                                                    <option value="ADD">ADD</option>
+                                                    <option value="DELETE">DELETE</option>
+                                                    <option value="CHECK">CHECK</option>
+                                                </select>
+                                            </div>
+                                            <br>
+
                                             <div class="form-inline">
-                                                <button href="#" class="btn btn-success btn-sm" role="button">Aceptar</button>
-                                                <button class="btn btn-danger btn-sm" role="button" type="reset">Cancelar</button>
+                                                <button onclick="consultaPorOTP();" type="submit" class="btn btn-success btn-sm" role="button">Aceptar</button>
+                                                <button onclick="refresh();" type="reset" class="btn btn-danger btn-sm" role="button" >Limpiar</button>
                                             </div>
                                         </div>
                                     </form>
@@ -145,7 +171,7 @@
                                 </div>
                             </div>
 
-                            <div id="mttoDiv" class="panel panel-default" style="display: none;">
+                            <div id="mttoDiv" class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title"><i class="fa fa-fw fa-empire"></i> MTTOPARA</h3>
                                 </div>
@@ -154,13 +180,13 @@
                                     <form class="col-md-offset-1" action="" method="post">
                                         <div class="col-md-6">
                                             <div class="input-group">
-                                                <span class="input-group-addon" id="basic-addon1">@</span>
-                                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+                                                <span class="input-group-addon" id="">@</span>
+                                                <input type="text" class="form-control" placeholder="Username" aria-describedby="">
                                             </div>
                                             <br>
                                             <div class="form-inline">
-                                                <button href="#" class="btn btn-success btn-sm" role="button">Aceptar</button>
-                                                <button class="btn btn-danger btn-sm" role="button" type="reset">Cancelar</button>
+                                                <button type="submit" class="btn btn-success btn-sm" role="button">Aceptar</button>
+                                                <button type="reset" class="btn btn-danger btn-sm" role="button" >Limpiar</button>
                                             </div>
                                         </div>
                                     </form>
@@ -168,7 +194,7 @@
                                 </div>
                             </div>
 
-                            <div id="lastDiv" class="panel panel-default" style="display: none;">
+                            <div id="lastDiv" class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title"><i class="fa fa-fw fa-ils"></i> Por Definir</h3>
                                 </div>
@@ -177,13 +203,13 @@
                                     <form class="col-md-offset-1" action="" method="post">
                                         <div class="col-md-6">
                                             <div class="input-group">
-                                                <span class="input-group-addon" id="basic-addon1">@</span>
-                                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+                                                <span class="input-group-addon" id="">@</span>
+                                                <input type="text" class="form-control" placeholder="Username" aria-describedby="">
                                             </div>
                                             <br>
                                             <div class="form-inline">
-                                                <button href="#" class="btn btn-success btn-sm" role="button">Aceptar</button>
-                                                <button class="btn btn-danger btn-sm" role="button" type="reset">Cancelar</button>
+                                                <button type="submit" class="btn btn-success btn-sm" role="button">Aceptar</button>
+                                                <button type="reset" class="btn btn-danger btn-sm" role="button" >Limpiar</button>
                                             </div>
                                         </div>
                                     </form>
@@ -205,6 +231,7 @@
                                     <table id="tablaOperaciones" class="display" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
+                                                <th>Tipo</th>
                                                 <th>URL</th>
                                                 <th>Data</th>
                                                 <th>Fecha</th>
@@ -212,6 +239,7 @@
                                         </thead>
                                         <tfoot>
                                             <tr>
+                                                <th>Tipo</th>
                                                 <th>URL</th>
                                                 <th>Data</th>
                                                 <th>Fecha</th>
@@ -242,7 +270,9 @@
         <script src="<%=context%>/js/bootstrap.min.js"></script>
 
         <!-- Table JavaScript -->
-        <script src="<%=context%>/js/dataTables.min.js"></script>
+        <!--<script src="<%=context%>/js/dataTables.min.js"></script>-->
+        <script src="<%=context%>/js/jquery.dataTables.min.js"></script>
+        <script src="<%=context%>/js/dataTables.bootstrap.js"></script>
 
         <!-- Functions JavaScript -->
         <script src="<%=context%>/js/functions.js"></script>

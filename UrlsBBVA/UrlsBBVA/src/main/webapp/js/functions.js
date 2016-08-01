@@ -13,11 +13,7 @@
  </script>
  */
 $(document).ready(function () {
-
-    $('#tablaOperaciones').DataTable({
-        "pagingType": "full_numbers"
-    });
-
+//Llamada a limpiar la lista cuando se entra
     $("#peticionList").click(function () {
         $("#peticionDiv").show();
         $("#usoOtpDiv").hide();
@@ -45,54 +41,60 @@ $(document).ready(function () {
 
 });
 
-
-function consultarPorPeticion() {
-    var obj = new Object();
-    obj.operacion = "pruebaKZML";
-    obj.concepto = "PETICION;XMJN;";
-
+function refresh() {
+    var context = $('#contexto').val();
     $.ajax({
-        type: 'GET',
-        //url: 'https://www.bancomermovil.com/mbhxp_mx_web/servlet/ServletOperacionWeb?OPERACION=BAN2O05&LOCALE=es_ES&PAR_INICIO.0={"operacion":"pruebaKZML","concepto":"PETICION;XMJN;"}',
-        url: 'https://www.bancomermovil.com/mbhxp_mx_web/servlet/ServletOperacionWeb?OPERACION=BAN2O05&LOCALE=es_ES&PAR_INICIO.0=' + JSON.stringify(obj) + '',
-        success: function (data) {
-            console.log("success: " + data);
-            alert(data);
+        type: "POST",
+        url: context + '/ServletUrls',
+        data: {
+            opcion: '2'
         },
-        error: function (data) {
-            console.log("error: " + data);
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+            $('#cuerpotablaOperaciones').remove();
+            var cuerpoT = '<tbody id="cuerpotablaOperaciones">';
+            $('#tablaOperaciones').append(cuerpoT + '</tbody>');
+            $('#tablaOperaciones').dataTable();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+        },
+        beforeSend: function (jqXHR, settings) {
+        },
+        complete: function (jqXHR, textStatus) {
         }
     });
-
+    location.reload();
 }
 
 function consultaPorPeticion() {
-    $.ajaxSetup({
-        async: false
-    });
+//    $.ajaxSetup({
+//        async: false
+//    });
 
     var context = $('#contexto').val();
     var user = $('#usuariotxt').val();
+    var selectPeticion = $('#selectPeticion').val();
 
     $.ajax({
         type: "GET",
         url: context + '/ServletUrls',
         data: {
             opcion: '1',
-            usuariotxt: user
+            usuariotxt: user,
+            selectPeticion: selectPeticion
         },
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
             $('#cuerpotablaOperaciones').remove();
-            var cuerpoT = '<tbody id="cuerpotablaPricipalArchivos">';
-
-            cuerpoT += "<tr><td>" + data.url + "</td>"
-            + "<td class='text-center'>" + data.data + "</td>"
-                    + "<td class='text-center'>" + data.fecha + "</td></tr>";
-
+            var cuerpoT = '<tbody id="cuerpotablaOperaciones">';
+            for (BuscadorObjeto in data) {
+                cuerpoT += "<tr><td class='text-center'>Petición</td>"
+                        + "<td  class='text-center'>" + data[BuscadorObjeto].url + "</td>"
+                        + "<td class='text-center'>" + data[BuscadorObjeto].data + "</td>"
+                        + "<td class='text-center'>" + data[BuscadorObjeto].fecha + "</td></tr>"
+            }
             $('#tablaOperaciones').append(cuerpoT + '</tbody>');
             $('#tablaOperaciones').dataTable();
-
         },
         error: function (jqXHR, textStatus, errorThrown) {
         },
@@ -102,7 +104,73 @@ function consultaPorPeticion() {
         }
     });
 
-    $.ajaxSetup({
-        async: true
-    });
+//    $.ajaxSetup({
+//        async: true
+//    });
 }
+
+function consultaPorOTP() {
+//    $.ajaxSetup({
+//        async: false
+//    });
+
+    var context = $('#contexto').val();
+    var llaveOTPtxt = $('#llaveOTPtxt').val();
+    var numselectOTP = $('#selectOTP').val();
+    var selTipo = $('#selTipo').val();
+
+    $.ajax({
+        type: "GET",
+        url: context + '/ServletUrls',
+        data: {
+            opcion: '3',
+            llaveOTPtxt: llaveOTPtxt,
+            numselectOTP: numselectOTP,
+            selTipo: selTipo
+        },
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+            console.log(textStatus + "");
+            $('#cuerpotablaOperaciones').remove();
+            var cuerpoT = '<tbody id="cuerpotablaOperaciones">';
+            for (BuscadorObjeto in data) {
+                cuerpoT += "<tr><td class='text-center'>OTP</td>"
+                        + "<td  class='text-center'>" + data[BuscadorObjeto].url + "</td>"
+                        + "<td class='text-center'>" + data[BuscadorObjeto].data + "</td>"
+                        + "<td class='text-center'>" + data[BuscadorObjeto].fecha + "</td></tr>"
+            }
+            $('#tablaOperaciones').append(cuerpoT + '</tbody>');
+            $('#tablaOperaciones').dataTable();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+        },
+        beforeSend: function (jqXHR, settings) {
+        },
+        complete: function (jqXHR, textStatus) {
+        }
+    });
+
+
+//    $.ajaxSetup({
+//        async: true
+//    });
+}
+
+//function consultarPorPeticion() {
+//    var obj = new Object();
+//    obj.operacion = "pruebaKZML";
+//    obj.concepto = "PETICION;XMJN;";
+//
+//    $.ajax({
+//        type: 'GET',
+//        //url: 'https://www.bancomermovil.com/mbhxp_mx_web/servlet/ServletOperacionWeb?OPERACION=BAN2O05&LOCALE=es_ES&PAR_INICIO.0={"operacion":"pruebaKZML","concepto":"PETICION;XMJN;"}',
+//        url: 'https://www.bancomermovil.com/mbhxp_mx_web/servlet/ServletOperacionWeb?OPERACION=BAN2O05&LOCALE=es_ES&PAR_INICIO.0=' + JSON.stringify(obj) + '',
+//        success: function (data) {
+//            console.log("success: " + data);
+//            alert(data);
+//        },
+//        error: function (data) {
+//            console.log("error: " + data);
+//        }
+//    });
+//}

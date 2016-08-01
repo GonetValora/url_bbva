@@ -17,13 +17,13 @@ import javax.net.ssl.HttpsURLConnection;
  *
  * @author macbookair
  */
-public class DaoURl {
+public class DaoPeticionUrl {
 
     public static void main(String[] args) {
         //consultaDePeticion("");
     }
 
-    public Map consultaDePeticion(String dato) {
+    public Map consultaDePeticion(String user) {
         Map mapaDatos = new HashMap();
         try {
 
@@ -35,7 +35,7 @@ public class DaoURl {
             today = new Date();
             fecha = formatter.format(today);
 
-            String httpsURL = "https://www.bancomermovil.com/mbhxp_mx_web/servlet/ServletOperacionWeb?OPERACION=BAN2O05&LOCALE=es_ES&PAR_INICIO.0={\"operacion\":\"pruebaKZML\",\"concepto\":\"PETICION;" + dato + ";\"}";
+            String httpsURL = "https://www.bancomermovil.com/mbhxp_mx_web/servlet/ServletOperacionWeb?OPERACION=BAN2O05&LOCALE=es_ES&PAR_INICIO.0={\"operacion\":\"pruebaKZML\",\"concepto\":\"PETICION;" + user + ";\"}";
             URL myurl = new URL(httpsURL);
             HttpsURLConnection con = (HttpsURLConnection) myurl.openConnection();
             InputStream ins = con.getInputStream();

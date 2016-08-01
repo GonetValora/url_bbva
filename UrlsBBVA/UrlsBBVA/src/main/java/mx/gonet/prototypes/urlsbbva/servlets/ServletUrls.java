@@ -8,16 +8,14 @@ package mx.gonet.prototypes.urlsbbva.servlets;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import mx.gonet.prototypes.urlsbbva.daos.DaoURl;
+import mx.gonet.prototypes.urlsbbva.daos.DaoOTPUrl;
+import mx.gonet.prototypes.urlsbbva.daos.DaoPeticionUrl;
 
 /**
  *
@@ -32,27 +30,50 @@ public class ServletUrls extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
+     * @throws ServletException if a servlet-specific error oc curs
      * @throws IOException if an I/O error occurs
      */
-    final static String urlPeticion = "1";
-    String operaciones = "";
+    static final String UrlTipoPeticion = "1";
+    static final String RefreshList = "2";
+    static final String UrlTipoOTP = "3";
+    ArrayList listadoRespuestas = new ArrayList();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json;");
-        DaoURl dao = new DaoURl();
+        DaoPeticionUrl daoPet = new DaoPeticionUrl();
+        DaoOTPUrl daoOtp = new DaoOTPUrl();
 
         PrintWriter out = response.getWriter();
         String opcion = request.getParameter("opcion");
         Gson gson = new Gson();
 
-
         switch (opcion) {
-            case urlPeticion:
+            case UrlTipoPeticion:
                 String user = request.getParameter("usuariotxt");
-                out.print(gson.toJson(dao.consultaDePeticion(user)));
+                int numPeticiones = Integer.parseInt(request.getParameter("selectPeticion"));
+                for (int i = 0; i < numPeticiones; i++) {
+                    listadoRespuestas.add(daoPet.consultaDePeticion(user));
+                }
+                out.print(gson.toJson(listadoRespuestas));
                 break;
+
+            case UrlTipoOTP:
+                String llaveOTPtxt = request.getParameter("llaveOTPtxt");
+                String selTipo = request.getParameter("selTipo");
+
+                int numselectOTP = Integer.parseInt(request.getParameter("numselectOTP"));
+                for (int i = 0; i < numselectOTP; i++) {
+                    listadoRespuestas.add(daoOtp.consultaDePeticion(llaveOTPtxt, selTipo));
+                }
+                out.print(gson.toJson(listadoRespuestas));
+                break;
+
+            case RefreshList:
+                listadoRespuestas = new ArrayList();
+                out.print(gson.toJson(listadoRespuestas));
+                break;
+
         }
 
     }
