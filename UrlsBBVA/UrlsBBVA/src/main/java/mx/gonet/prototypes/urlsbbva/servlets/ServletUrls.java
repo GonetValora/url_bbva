@@ -41,15 +41,14 @@ public class ServletUrls extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json;");
-        DaoPeticionUrl daoPet = new DaoPeticionUrl();
-        DaoOTPUrl daoOtp = new DaoOTPUrl();
 
         PrintWriter out = response.getWriter();
         String opcion = request.getParameter("opcion");
         Gson gson = new Gson();
-
+        System.out.println("opc"+opcion);
         switch (opcion) {
             case UrlTipoPeticion:
+                DaoPeticionUrl daoPet = new DaoPeticionUrl();
                 String user = request.getParameter("usuariotxt");
                 int numPeticiones = Integer.parseInt(request.getParameter("selectPeticion"));
                 for (int i = 0; i < numPeticiones; i++) {
@@ -59,6 +58,7 @@ public class ServletUrls extends HttpServlet {
                 break;
 
             case UrlTipoOTP:
+                DaoOTPUrl daoOtp = new DaoOTPUrl();
                 String llaveOTPtxt = request.getParameter("llaveOTPtxt");
                 String selTipo = request.getParameter("selTipo");
 

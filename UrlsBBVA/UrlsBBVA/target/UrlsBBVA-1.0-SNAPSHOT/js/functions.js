@@ -44,7 +44,7 @@ $(document).ready(function () {
 function refresh() {
     var context = $('#contexto').val();
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: context + '/ServletUrls',
         data: {
             opcion: '2'
@@ -116,8 +116,8 @@ function consultaPorOTP() {
 
     var context = $('#contexto').val();
     var llaveOTPtxt = $('#llaveOTPtxt').val();
-    var numselectOTP = $('#selectOTP').val();
     var selTipo = $('#selTipo').val();
+    var numselectOTP = $('#selectOTP').val();
 
     $.ajax({
         type: "GET",
@@ -125,8 +125,8 @@ function consultaPorOTP() {
         data: {
             opcion: '3',
             llaveOTPtxt: llaveOTPtxt,
-            numselectOTP: numselectOTP,
-            selTipo: selTipo
+            selTipo: selTipo,
+            numselectOTP: numselectOTP
         },
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -134,6 +134,7 @@ function consultaPorOTP() {
             $('#cuerpotablaOperaciones').remove();
             var cuerpoT = '<tbody id="cuerpotablaOperaciones">';
             for (BuscadorObjeto in data) {
+                console.log(data[BuscadorObjeto].url + "");
                 cuerpoT += "<tr><td class='text-center'>OTP</td>"
                         + "<td  class='text-center'>" + data[BuscadorObjeto].url + "</td>"
                         + "<td class='text-center'>" + data[BuscadorObjeto].data + "</td>"

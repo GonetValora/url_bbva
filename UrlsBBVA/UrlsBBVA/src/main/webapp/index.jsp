@@ -129,7 +129,7 @@
                                 </div>
                             </div>
 
-                            <div id="usoOtpDiv" class="panel panel-default">
+                            <div id="usoOtpDiv" class="panel panel-default" style="display: none;">
                                 <div class="panel-heading">
                                     <h3 class="panel-title"><i class="fa fa-fw fa-delicious"></i> Uso De OTP</h3>
                                 </div>
@@ -171,36 +171,33 @@
                                 </div>
                             </div>
 
-                            <div id="mttoDiv" class="panel panel-default">
+                            <div id="mttoDiv" class="panel panel-default" style="display: none;">
                                 <div class="panel-heading">
                                     <h3 class="panel-title"><i class="fa fa-fw fa-empire"></i> MTTOPARA</h3>
                                 </div>
                                 <div class="panel-body">
 
-                                    <form class="col-md-offset-1" action="" method="post">
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon" id="">@</span>
-                                                <input type="text" class="form-control" placeholder="Username" aria-describedby="">
-                                            </div>
-                                            <br>
-                                            <div class="form-inline">
-                                                <button type="submit" class="btn btn-success btn-sm" role="button">Aceptar</button>
-                                                <button type="reset" class="btn btn-danger btn-sm" role="button" >Limpiar</button>
-                                            </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="">@</span>
+                                            <input type="text" class="form-control" placeholder="Username" aria-describedby="">
                                         </div>
-                                    </form>
-
+                                        <br>
+                                        <div class="form-inline">
+                                            <button type="submit" class="btn btn-success btn-sm" role="button">Aceptar</button>
+                                            <button type="reset" class="btn btn-danger btn-sm" role="button" >Limpiar</button>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                             </div>
 
-                            <div id="lastDiv" class="panel panel-default">
+                            <div id="lastDiv" class="panel panel-default" style="display: none;">
                                 <div class="panel-heading">
                                     <h3 class="panel-title"><i class="fa fa-fw fa-ils"></i> Por Definir</h3>
                                 </div>
                                 <div class="panel-body">
 
-                                    <form class="col-md-offset-1" action="" method="post">
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon" id="">@</span>
@@ -212,7 +209,6 @@
                                                 <button type="reset" class="btn btn-danger btn-sm" role="button" >Limpiar</button>
                                             </div>
                                         </div>
-                                    </form>
 
                                 </div>
                             </div>
