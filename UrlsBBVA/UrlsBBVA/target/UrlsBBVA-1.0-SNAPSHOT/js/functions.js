@@ -14,6 +14,11 @@
  */
 $(document).ready(function () {
 //Llamada a limpiar la lista cuando se entra
+    $("#peticionDiv").show();
+    $("#usoOtpDiv").hide();
+    $("#mttoDiv").hide();
+    $("#lastDiv").hide();
+
     $("#peticionList").click(function () {
         $("#peticionDiv").show();
         $("#usoOtpDiv").hide();

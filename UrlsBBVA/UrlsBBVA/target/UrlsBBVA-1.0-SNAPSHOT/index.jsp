@@ -129,7 +129,7 @@
                                 </div>
                             </div>
 
-                            <div id="usoOtpDiv" class="panel panel-default" style="display: none;">
+                            <div id="usoOtpDiv" class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title"><i class="fa fa-fw fa-delicious"></i> Uso De OTP</h3>
                                 </div>
@@ -171,7 +171,7 @@
                                 </div>
                             </div>
 
-                            <div id="mttoDiv" class="panel panel-default" style="display: none;">
+                            <div id="mttoDiv" class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title"><i class="fa fa-fw fa-empire"></i> MTTOPARA</h3>
                                 </div>
@@ -192,7 +192,7 @@
                                 </div>
                             </div>
 
-                            <div id="lastDiv" class="panel panel-default" style="display: none;">
+                            <div id="lastDiv" class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title"><i class="fa fa-fw fa-ils"></i> Por Definir</h3>
                                 </div>
