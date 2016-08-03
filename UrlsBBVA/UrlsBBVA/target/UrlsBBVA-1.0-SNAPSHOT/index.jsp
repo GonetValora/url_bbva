@@ -58,7 +58,7 @@
                             <a href="#"><i class="fa fa-fw fa-codepen"></i> Petición</a>
                         </li>
                         <li id="usoOtpList">
-                            <a href="#"><i class="fa fa-fw fa-delicious"></i> COMTROLM</a>
+                            <a href="#"><i class="fa fa-fw fa-delicious"></i> Control-M</a>
                         </li>
                         <li id="mttoList">
                             <a href="#"><i class="fa fa-fw fa-empire"></i> MTTOPARA</a>
@@ -85,8 +85,10 @@
             </nav>
 
             <div id="page-wrapper">
+                <br>
+                <div class="col-md-offset-5 panel loader" id="loaderDiv" name="loaderDiv" style="display: none;"></div>
 
-                <div class="container-fluid">
+                <div class="container-fluid" id="containerDiv" name="containerDiv">
                     <input type="hidden" name="contexto" id="contexto" value="<%=context%>"/>
                     <!-- Page Heading 
                     <div class="row">
@@ -112,17 +114,17 @@
                                             <label>Numero de Usuario:</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon" id=""></span>
-                                                <input value="XMJN" id="usuariotxt" name="usuariotxt" type="text" class="form-control" placeholder="Usuario" aria-describedby="">
+                                                <input id="usuariotxt" name="usuariotxt" type="text" class="form-control" placeholder="Usuario" aria-describedby="">
                                             </div>
                                             <br>
                                             <label>Numero de Peticiones:</label>
                                             <div class="input-group col-md-3">
                                                 <span class="input-group-addon" id=""></span>
-                                                <input value="1" min="1" id="selectPeticion" name="selectPeticion" type="number" class="form-control">
+                                                <input value="1" min="1" max="100" id="selectNumPeticiones" name="selectNumPeticiones" type="number" class="form-control">
                                             </div>
                                             <br>
                                             <div class="form-inline">
-                                                <button onclick="consultaPorPeticion();" class="btn btn-success btn-sm" role="button">Aceptar</button>
+                                                <button onclick="consultaPorPeticion();" onchange="" class="btn btn-success btn-sm" role="button">Aceptar</button>
                                                 <button onclick="refresh();" class="btn btn-danger btn-sm" role="button" >Limpiar</button>
                                             </div>
                                         </div>
@@ -133,7 +135,7 @@
 
                             <div id="usoOtpDiv" class="panel panel-primary" style="display: none;">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="fa fa-fw fa-delicious"></i> COMTROLM</h3>
+                                    <h3 class="panel-title"><i class="fa fa-fw fa-delicious"></i> Control-M</h3>
                                 </div>
                                 <div class="panel-body">
 
@@ -152,22 +154,22 @@
                                             <label>Llave OTP:</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon" id=""></span>
-                                                <input value="08071052142016430329" name="llaveOTPtxt" id="llaveOTPtxt" type="text" class="form-control" placeholder="Llave OTP" aria-describedby="">
+                                                <input name="llaveOTPtxt" id="llaveOTPtxt" type="text" class="form-control" placeholder="Llave OTP" aria-describedby="">
                                             </div>
                                             <br>
 
-                                            <label>Parametro:</label>
+                                            <label>Condicion:</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon" id=""></span>
-                                                <input value="SAJCYCPD_OK_PR" name="parametrotxt" id="parametrotxt" type="text" class="form-control" placeholder="Parametro" aria-describedby="">
+                                                <input name="parametrotxt" id="parametrotxt" type="text" class="form-control" placeholder="Parametro" aria-describedby="">
                                             </div>
                                             <br>
 
                                             <label>Fecha:</label>
                                             <div class="input-group col-md-4">
                                                 <div class="input-group date">
-                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                                    <input pattern="(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}" id="datepickerD" id="datepickerD" placeholder="Fecha de asignación" required name="datepickerD" type="text" onchange="cambiarColor(this.id)" class="form-control">
+                                                    <span class="input-group-addon"></span>
+                                                    <input pattern="(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}" id="datepickerD" id="datepickerD" placeholder="Fecha" name="datepickerD" type="text" onchange="cambiarColor(this.id)" class="form-control">
                                                 </div>
                                             </div>
                                             <br>
@@ -212,7 +214,8 @@
                                 <div class="panel-heading">
                                     <h3 class="panel-title"><i class="fa fa-qrcode fa-fw"></i> Area GRID</h3>
                                 </div>
-                                <div class="panel-body table-responsive" id="contenedorTabla">
+
+                                <div class="panel-body table-responsive" id="contenedorTabla" name="contenedorTabla">
 
                                     <table id="tablaOperaciones" class="display table">
                                         <thead>

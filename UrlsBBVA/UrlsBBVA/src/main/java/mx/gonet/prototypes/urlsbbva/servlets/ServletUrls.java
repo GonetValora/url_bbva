@@ -49,7 +49,7 @@ public class ServletUrls extends HttpServlet {
             case UrlTipoPeticion:
                 DaoPeticionUrl daoPet = new DaoPeticionUrl();
                 String user = request.getParameter("usuariotxt");
-                int numPeticiones = Integer.parseInt(request.getParameter("selectPeticion"));
+                int numPeticiones = Integer.parseInt(request.getParameter("selectNumPeticiones"));
                 for (int i = 0; i < numPeticiones; i++) {
                     listadoRespuestas.add(daoPet.consultaDePeticion(user));
                 }
