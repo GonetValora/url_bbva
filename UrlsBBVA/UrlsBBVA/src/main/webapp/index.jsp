@@ -27,6 +27,8 @@
         <!-- Custom Fonts -->
         <link href="<%=context%>/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+        <link rel="stylesheet" href="<%=context%>/css/bootstrap-datepicker3.css">
+
     </head>
 
     <body>
@@ -56,7 +58,7 @@
                             <a href="#"><i class="fa fa-fw fa-codepen"></i> Petición</a>
                         </li>
                         <li id="usoOtpList">
-                            <a href="#"><i class="fa fa-fw fa-delicious"></i> Uso De OTP</a>
+                            <a href="#"><i class="fa fa-fw fa-delicious"></i> COMTROLM</a>
                         </li>
                         <li id="mttoList">
                             <a href="#"><i class="fa fa-fw fa-empire"></i> MTTOPARA</a>
@@ -86,7 +88,7 @@
 
                 <div class="container-fluid">
                     <input type="hidden" name="contexto" id="contexto" value="<%=context%>"/>
-                    <!-- Page Heading -->
+                    <!-- Page Heading 
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 class="page-header">
@@ -94,7 +96,7 @@
                             </h1>
                         </div>
                     </div>
-
+                    -->
                     <div class="row">
                         <div class="col-lg-12">
 
@@ -114,14 +116,14 @@
                                             </div>
                                             <br>
                                             <label>Numero de Peticiones:</label>
-                                            <div class="input-group col-md-3 col-md-offset-9">
+                                            <div class="input-group col-md-3">
                                                 <span class="input-group-addon" id=""></span>
                                                 <input value="1" min="1" id="selectPeticion" name="selectPeticion" type="number" class="form-control">
                                             </div>
                                             <br>
                                             <div class="form-inline">
-                                                <button onclick="consultaPorPeticion();" type="submit" class="btn btn-success btn-sm" role="button">Aceptar</button>
-                                                <button onclick="refresh();" type="reset" class="btn btn-danger btn-sm" role="button" >Limpiar</button>
+                                                <button onclick="consultaPorPeticion();" class="btn btn-success btn-sm" role="button">Aceptar</button>
+                                                <button onclick="refresh();" class="btn btn-danger btn-sm" role="button" >Limpiar</button>
                                             </div>
                                         </div>
                                     </div>
@@ -129,30 +131,16 @@
                                 </div>
                             </div>
 
-                            <div id="usoOtpDiv" class="panel panel-default">
+                            <div id="usoOtpDiv" class="panel panel-primary" style="display: none;">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="fa fa-fw fa-delicious"></i> Uso De OTP</h3>
+                                    <h3 class="panel-title"><i class="fa fa-fw fa-delicious"></i> COMTROLM</h3>
                                 </div>
                                 <div class="panel-body">
 
-                                    <form class="col-md-offset-1" action="" method="post">
+                                    <div class="col-md-offset-1">
                                         <div class="col-md-6">
-                                            <label>Llave OTP:</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon" id=""></span>
-                                                <input value="08071052142016430329" name="llaveOTPtxt" id="llaveOTPtxt" type="text" class="form-control" placeholder="Llave OTP" aria-describedby="">
-                                            </div>
-                                            <br>
-
-                                            <label>Numero de Peticiones:</label>
-                                            <div class="input-group col-md-3 col-md-offset-9">
-                                                <span class="input-group-addon" id=""></span>
-                                                <input value="1" min="1" id="selectOTP" name="selectOTP" type="number" class="form-control">
-                                            </div>
-                                            <br>
-
                                             <label>Tipo Concepto:</label>
-                                            <div class="input-group col-md-4 col-md-offset-8">
+                                            <div class="input-group col-md-4">
                                                 <select class="form-control" id="selTipo" name="selTipo">
                                                     <option value="ADD">ADD</option>
                                                     <option value="DELETE">DELETE</option>
@@ -161,54 +149,56 @@
                                             </div>
                                             <br>
 
-                                            <div class="form-inline">
-                                                <button onclick="consultaPorOTP();" type="submit" class="btn btn-success btn-sm" role="button">Aceptar</button>
-                                                <button onclick="refresh();" type="reset" class="btn btn-danger btn-sm" role="button" >Limpiar</button>
+                                            <label>Llave OTP:</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon" id=""></span>
+                                                <input value="08071052142016430329" name="llaveOTPtxt" id="llaveOTPtxt" type="text" class="form-control" placeholder="Llave OTP" aria-describedby="">
                                             </div>
+                                            <br>
+
+                                            <label>Parametro:</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon" id=""></span>
+                                                <input value="SAJCYCPD_OK_PR" name="parametrotxt" id="parametrotxt" type="text" class="form-control" placeholder="Parametro" aria-describedby="">
+                                            </div>
+                                            <br>
+
+                                            <label>Fecha:</label>
+                                            <div class="input-group col-md-4">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                    <input pattern="(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}" id="datepickerD" id="datepickerD" placeholder="Fecha de asignación" required name="datepickerD" type="text" onchange="cambiarColor(this.id)" class="form-control">
+                                                </div>
+                                            </div>
+                                            <br>
+
+                                            <div class="form-inline">
+                                                <button onclick="consultaPorOTP();" class="btn btn-success btn-sm" role="button">Aceptar</button>
+                                                <button onclick="refresh();" class="btn btn-danger btn-sm" role="button" >Limpiar</button>                                        </div>
                                         </div>
-                                    </form>
+                                    </div>
 
                                 </div>
                             </div>
 
-                            <div id="mttoDiv" class="panel panel-default">
+                            <div id="mttoDiv" class="panel panel-default" style="display: none;">
                                 <div class="panel-heading">
                                     <h3 class="panel-title"><i class="fa fa-fw fa-empire"></i> MTTOPARA</h3>
                                 </div>
                                 <div class="panel-body">
 
-                                    <div class="col-md-6">
-                                        <div class="input-group">
-                                            <span class="input-group-addon" id="">@</span>
-                                            <input type="text" class="form-control" placeholder="Username" aria-describedby="">
-                                        </div>
-                                        <br>
-                                        <div class="form-inline">
-                                            <button type="submit" class="btn btn-success btn-sm" role="button">Aceptar</button>
-                                            <button type="reset" class="btn btn-danger btn-sm" role="button" >Limpiar</button>
-                                        </div>
-                                    </div>
-                                    
+
+
                                 </div>
                             </div>
 
-                            <div id="lastDiv" class="panel panel-default">
+                            <div id="lastDiv" class="panel panel-default" style="display: none;">
                                 <div class="panel-heading">
                                     <h3 class="panel-title"><i class="fa fa-fw fa-ils"></i> Por Definir</h3>
                                 </div>
                                 <div class="panel-body">
 
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon" id="">@</span>
-                                                <input type="text" class="form-control" placeholder="Username" aria-describedby="">
-                                            </div>
-                                            <br>
-                                            <div class="form-inline">
-                                                <button type="submit" class="btn btn-success btn-sm" role="button">Aceptar</button>
-                                                <button type="reset" class="btn btn-danger btn-sm" role="button" >Limpiar</button>
-                                            </div>
-                                        </div>
+
 
                                 </div>
                             </div>
@@ -222,9 +212,9 @@
                                 <div class="panel-heading">
                                     <h3 class="panel-title"><i class="fa fa-qrcode fa-fw"></i> Area GRID</h3>
                                 </div>
-                                <div class="panel-body">
+                                <div class="panel-body table-responsive" id="contenedorTabla">
 
-                                    <table id="tablaOperaciones" class="display" cellspacing="0" width="100%">
+                                    <table id="tablaOperaciones" class="display table">
                                         <thead>
                                             <tr>
                                                 <th>Tipo</th>
@@ -272,6 +262,10 @@
 
         <!-- Functions JavaScript -->
         <script src="<%=context%>/js/functions.js"></script>
+
+        <script src="<%=context%>/js/bootstrap-datepicker.js"></script>
+        <script src="<%=context%>/js/bootstrap-datepicker.min.js"></script>
+        <script src="<%=context%>/js/bootstrap-datepicker.es.min.js"></script>
 
     </body>
 

@@ -45,7 +45,6 @@ public class ServletUrls extends HttpServlet {
         PrintWriter out = response.getWriter();
         String opcion = request.getParameter("opcion");
         Gson gson = new Gson();
-        System.out.println("opc"+opcion);
         switch (opcion) {
             case UrlTipoPeticion:
                 DaoPeticionUrl daoPet = new DaoPeticionUrl();
@@ -61,11 +60,11 @@ public class ServletUrls extends HttpServlet {
                 DaoOTPUrl daoOtp = new DaoOTPUrl();
                 String llaveOTPtxt = request.getParameter("llaveOTPtxt");
                 String selTipo = request.getParameter("selTipo");
+                String parametrotxt = request.getParameter("parametrotxt");
+                String datepickerD = request.getParameter("datepickerD");
+                String fechaPeticion = datepickerD.substring(0, 2) + ";" + datepickerD.substring(3, 5);
+                listadoRespuestas.add(daoOtp.consultaDePeticion(llaveOTPtxt, selTipo, parametrotxt, fechaPeticion));
 
-                int numselectOTP = Integer.parseInt(request.getParameter("numselectOTP"));
-                for (int i = 0; i < numselectOTP; i++) {
-                    listadoRespuestas.add(daoOtp.consultaDePeticion(llaveOTPtxt, selTipo));
-                }
                 out.print(gson.toJson(listadoRespuestas));
                 break;
 

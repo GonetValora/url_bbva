@@ -23,7 +23,7 @@ public class DaoOTPUrl {
         //consultaDePeticion("");
     }
 
-    public Map consultaDePeticion(String llaveOTPtxt, String selTipo) {
+    public Map consultaDePeticion(String llaveOTPtxt, String selTipo, String parametrotxt, String fechaPeticion) {
         Map mapaDatos = new HashMap();
         try {
 
@@ -31,11 +31,11 @@ public class DaoOTPUrl {
             String fecha;
             SimpleDateFormat formatter;
 
-            formatter = new SimpleDateFormat("yyyy-MMMMM-dd hh:mm aaa");
+            formatter = new SimpleDateFormat("yyyy-MMMMM-dd hh:mm:ss aaa");
             today = new Date();
             fecha = formatter.format(today);
 
-            String httpsURL = "https://www.bancomermovil.com/mbhxp_mx_web/servlet/ServletOperacionWeb?OPERACION=BAN2O05&LOCALE=es_ES&PAR_INICIO.0={\"operacion\":\"pruebaKZML\",\"concepto\":\"COMTROLM;" + llaveOTPtxt + ";" + selTipo + ";SAJCYCPD_OK_PR;14;07;\"}";
+            String httpsURL = "https://www.bancomermovil.com/mbhxp_mx_web/servlet/ServletOperacionWeb?OPERACION=BAN2O05&LOCALE=es_ES&PAR_INICIO.0={\"operacion\":\"pruebaKZML\",\"concepto\":\"COMTROLM;" + llaveOTPtxt + ";" + selTipo + ";" + parametrotxt + ";" + fechaPeticion + ";\"}";
             System.out.println(httpsURL);
             URL myurl = new URL(httpsURL);
             HttpsURLConnection con = (HttpsURLConnection) myurl.openConnection();
@@ -48,6 +48,7 @@ public class DaoOTPUrl {
             while ((inputLine = in.readLine()) != null) {
                 outputreturn += inputLine;
             }
+            mapaDatos.put("operacion", "OTP");
             mapaDatos.put("url", httpsURL);
             mapaDatos.put("data", outputreturn);
             mapaDatos.put("fecha", fecha);

@@ -14,10 +14,6 @@
  */
 $(document).ready(function () {
 //Llamada a limpiar la lista cuando se entra
-    $("#peticionDiv").show();
-    $("#usoOtpDiv").hide();
-    $("#mttoDiv").hide();
-    $("#lastDiv").hide();
 
     $("#peticionList").click(function () {
         $("#peticionDiv").show();
@@ -30,6 +26,11 @@ $(document).ready(function () {
         $("#usoOtpDiv").show();
         $("#mttoDiv").hide();
         $("#lastDiv").hide();
+
+        var d = new Date();
+        var datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + d.getFullYear();
+        $('#datepickerD').val(datestring);
+
     });
     $("#mttoList").click(function () {
         $("#peticionDiv").hide();
@@ -44,6 +45,12 @@ $(document).ready(function () {
         $("#lastDiv").show();
     });
 
+    $('#datepickerD').datepicker({
+        format: "dd-mm-yyyy",
+        language: "es",
+        autoclose: true
+    });
+
 });
 
 function refresh() {
@@ -56,9 +63,16 @@ function refresh() {
         },
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
-            $('#cuerpotablaOperaciones').remove();
-            var cuerpoT = '<tbody id="cuerpotablaOperaciones">';
-            $('#tablaOperaciones').append(cuerpoT + '</tbody>');
+            var table = $('#tablaOperaciones').DataTable();
+            table.destroy();
+            $('#tablaOperaciones').empty();
+            $('#tablaOperaciones').remove();
+            var cuerpoT = '<table id="tablaOperaciones" class="display table">'
+                    + ' <thead><tr><th>Tipo</th><th>URL</th><th>Data</th><th>Fecha</th></tr></thead>'
+                    + '<tbody id="cuerpotablaOperaciones"></tbody>'
+                    + '<tfoot><tr><th>Tipo</th><th>URL</th><th>Data</th><th>Fecha</th></tr></tfoot>'
+                    + '</table>';
+            $('#contenedorTabla').append(cuerpoT);
             $('#tablaOperaciones').dataTable();
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -68,7 +82,6 @@ function refresh() {
         complete: function (jqXHR, textStatus) {
         }
     });
-    location.reload();
 }
 
 function consultaPorPeticion() {
@@ -90,10 +103,12 @@ function consultaPorPeticion() {
         },
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
+            var table = $('#tablaOperaciones').DataTable();
+            table.destroy();
             $('#cuerpotablaOperaciones').remove();
             var cuerpoT = '<tbody id="cuerpotablaOperaciones">';
             for (BuscadorObjeto in data) {
-                cuerpoT += "<tr><td class='text-center'>Petición</td>"
+                cuerpoT += "<tr><td class='text-center'>" + data[BuscadorObjeto].operacion + "</td>"
                         + "<td  class='text-center'>" + data[BuscadorObjeto].url + "</td>"
                         + "<td class='text-center'>" + data[BuscadorObjeto].data + "</td>"
                         + "<td class='text-center'>" + data[BuscadorObjeto].fecha + "</td></tr>"
@@ -122,7 +137,8 @@ function consultaPorOTP() {
     var context = $('#contexto').val();
     var llaveOTPtxt = $('#llaveOTPtxt').val();
     var selTipo = $('#selTipo').val();
-    var numselectOTP = $('#selectOTP').val();
+    var parametrotxt = $('#parametrotxt').val();
+    var datepickerD = $('#datepickerD').val();
 
     $.ajax({
         type: "GET",
@@ -131,16 +147,18 @@ function consultaPorOTP() {
             opcion: '3',
             llaveOTPtxt: llaveOTPtxt,
             selTipo: selTipo,
-            numselectOTP: numselectOTP
+            parametrotxt: parametrotxt,
+            datepickerD: datepickerD
         },
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
-            console.log(textStatus + "");
+            var table = $('#tablaOperaciones').DataTable();
+            table.destroy();
             $('#cuerpotablaOperaciones').remove();
             var cuerpoT = '<tbody id="cuerpotablaOperaciones">';
             for (BuscadorObjeto in data) {
                 console.log(data[BuscadorObjeto].url + "");
-                cuerpoT += "<tr><td class='text-center'>OTP</td>"
+                cuerpoT += "<tr><td class='text-center'>" + data[BuscadorObjeto].operacion + "</td>"
                         + "<td  class='text-center'>" + data[BuscadorObjeto].url + "</td>"
                         + "<td class='text-center'>" + data[BuscadorObjeto].data + "</td>"
                         + "<td class='text-center'>" + data[BuscadorObjeto].fecha + "</td></tr>"

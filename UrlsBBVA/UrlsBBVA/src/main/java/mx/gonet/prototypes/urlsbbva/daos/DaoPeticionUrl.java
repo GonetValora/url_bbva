@@ -31,7 +31,7 @@ public class DaoPeticionUrl {
             String fecha;
             SimpleDateFormat formatter;
 
-            formatter = new SimpleDateFormat("yyyy-MMMMM-dd hh:mm aaa");
+            formatter = new SimpleDateFormat("yyyy-MMMMM-dd hh:mm:ss aaa");
             today = new Date();
             fecha = formatter.format(today);
 
@@ -47,6 +47,7 @@ public class DaoPeticionUrl {
             while ((inputLine = in.readLine()) != null) {
                 outputreturn += inputLine;
             }
+            mapaDatos.put("operacion", "Peticion");
             mapaDatos.put("url", httpsURL);
             mapaDatos.put("data", outputreturn);
             mapaDatos.put("fecha", fecha);
