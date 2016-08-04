@@ -26,11 +26,9 @@ $(document).ready(function () {
         $("#usoOtpDiv").show();
         $("#mttoDiv").hide();
         $("#lastDiv").hide();
-
         var d = new Date();
         var datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + d.getFullYear();
         $('#datepickerD').val(datestring);
-
     });
     $("#mttoList").click(function () {
         $("#peticionDiv").hide();
@@ -44,13 +42,11 @@ $(document).ready(function () {
         $("#mttoDiv").hide();
         $("#lastDiv").show();
     });
-
     $('#datepickerD').datepicker({
         format: "dd-mm-yyyy",
         language: "es",
         autoclose: true
     });
-
 });
 
 function refresh() {
@@ -83,9 +79,18 @@ function refresh() {
             $('#usuariotxt').val("");
             $('#selectNumPeticiones').val("1");
             var llaveOTPtxt = $('#llaveOTPtxt').val("");
-            var selTipo = $('#selTipo').val("");
+            var selTipo = $('#selTipo').val("ADD");
             var parametrotxt = $('#parametrotxt').val("");
-            var datepickerD = $('#datepickerD').val("");
+            var d = new Date();
+            var datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + d.getFullYear();
+            $('#datepickerD').val(datestring);
+
+            $('#llaveOTP').val("");
+            $('#tipoAccion').val("SELECT");
+            $('#idTxt').val("53");
+            $('#tipoAccion2').val("INPU");
+            $('#datoTxt').val("");
+            $('#statTxt').val("A1");
         }
     });
 }
@@ -130,7 +135,7 @@ function consultaPorPeticion() {
             }
         });
     } else {
-        alert("Verifica que todos los campos esten completos:");
+        alert("El campo Número de Usuario esta vacío");
     }
 }
 
@@ -141,7 +146,13 @@ function consultaPorOTP() {
     var parametrotxt = $('#parametrotxt').val().trim();
     var datepickerD = $('#datepickerD').val().trim();
 
-    if (llaveOTPtxt.length > 0 && parametrotxt.length > 0 && datepickerD.length > 0) {
+    var mensaje = llaveOTPtxt.length > 0 ?
+            parametrotxt.length > 0 ?
+            datepickerD.length > 0 ? ""
+            : "Selecciona una Fecha"
+            : "El campo Condición esta vacío"
+            : "El campo Llave OTP esta vacío";
+    if (mensaje.length === 0) {
         $.ajax({
             type: "GET",
             url: context + '/ServletUrls',
@@ -180,10 +191,75 @@ function consultaPorOTP() {
             }
         });
     } else {
-        alert("Verifica que todos los campos esten completos");
+        alert(mensaje);
     }
 }
 
+
+function consultaMTTOPARA() {
+    var context = $('#contexto').val();
+    var llaveOTP = $('#llaveOTP').val().trim();
+    var tipoAccion = $('#tipoAccion').val();
+    var idTxt = $('#idTxt').val().trim();
+    var tipoAccion2 = $('#tipoAccion2').val().trim();
+    var datoTxt = $('#datoTxt').val().trim();
+    var statTxt = $('#statTxt').val().trim();
+
+    var mensaje = llaveOTP.length > 0 ?
+            datoTxt.length > 0 ?
+            "" : "El campo Dato esta vacio"
+            : "El campo Llave OTP esta vacio";
+
+    if (mensaje.length === 0) {
+        $.ajax({
+            type: "GET",
+            url: context + '/ServletUrls',
+            data: {
+                opcion: '4',
+                llaveOTP: llaveOTP,
+                tipoAccion: tipoAccion,
+                idTxt: idTxt,
+                tipoAccion2: tipoAccion2,
+                datoTxt: datoTxt,
+                statTxt: statTxt
+            },
+            dataType: "json",
+            success: function (data, textStatus, jqXHR) {
+                var table = $('#tablaOperaciones').DataTable();
+                table.destroy();
+                $('#cuerpotablaOperaciones').remove();
+                var cuerpoT = '<tbody id="cuerpotablaOperaciones">';
+                for (BuscadorObjeto in data) {
+                    console.log(data[BuscadorObjeto].url + "");
+                    cuerpoT += "<tr><td class='text-center'>" + data[BuscadorObjeto].operacion + "</td>"
+                            + "<td  class='text-center'>" + data[BuscadorObjeto].url + "</td>"
+                            + "<td class='text-center'>" + data[BuscadorObjeto].data + "</td>"
+                            + "<td class='text-center'>" + data[BuscadorObjeto].fecha + "</td></tr>"
+                }
+                $('#tablaOperaciones').append(cuerpoT + '</tbody>');
+                $('#tablaOperaciones').dataTable();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+            },
+            beforeSend: function (jqXHR, settings) {
+                $("#loaderDiv").show();
+                $("#containerDiv").hide();
+            },
+            complete: function (jqXHR, textStatus) {
+                $("#loaderDiv").hide();
+                $("#containerDiv").show();
+            }
+        });
+    } else {
+        alert(mensaje);
+    }
+}
+
+//$("input").keypress(function () {
+//    var texto = this.value;
+//    console.log(texto);
+//    this.set(texto.toUpperCase());
+//});
 //function consultarPorPeticion() {
 //    var obj = new Object();
 //    obj.operacion = "pruebaKZML";

@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mx.gonet.prototypes.urlsbbva.daos.DaoMTTOPARA;
 import mx.gonet.prototypes.urlsbbva.daos.DaoOTPUrl;
 import mx.gonet.prototypes.urlsbbva.daos.DaoPeticionUrl;
 
@@ -36,6 +37,7 @@ public class ServletUrls extends HttpServlet {
     static final String UrlTipoPeticion = "1";
     static final String RefreshList = "2";
     static final String UrlTipoOTP = "3";
+    static final String UrlMTTOPARA = "4";
     ArrayList listadoRespuestas = new ArrayList();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -64,6 +66,20 @@ public class ServletUrls extends HttpServlet {
                 String datepickerD = request.getParameter("datepickerD");
                 String fechaPeticion = datepickerD.substring(0, 2) + ";" + datepickerD.substring(3, 5);
                 listadoRespuestas.add(daoOtp.consultaDePeticion(llaveOTPtxt, selTipo, parametrotxt, fechaPeticion));
+
+                out.print(gson.toJson(listadoRespuestas));
+                break;
+
+            case UrlMTTOPARA:
+                DaoMTTOPARA daoMTTO = new DaoMTTOPARA();
+                String llaveOTP = request.getParameter("llaveOTP");
+                String tipoAccion = request.getParameter("tipoAccion");
+                String idTxt = request.getParameter("idTxt");
+                String tipoAccion2 = request.getParameter("tipoAccion2");
+                String datoTxt = request.getParameter("datoTxt");
+                String statTxt = request.getParameter("statTxt");
+
+                listadoRespuestas.add(daoMTTO.consultaDePeticion(llaveOTP, tipoAccion, idTxt, tipoAccion2, datoTxt, statTxt));
 
                 out.print(gson.toJson(listadoRespuestas));
                 break;

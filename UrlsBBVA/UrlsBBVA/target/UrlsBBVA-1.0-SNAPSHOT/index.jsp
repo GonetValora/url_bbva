@@ -111,10 +111,10 @@
                                     <div class="col-md-offset-1">
                                         <input type="hidden" value="1" id="opcion" name="opcion">
                                         <div class="col-md-6">
-                                            <label>Numero de Usuario:</label>
+                                            <label>Número de Usuario:</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon" id=""></span>
-                                                <input id="usuariotxt" name="usuariotxt" type="text" class="form-control" placeholder="Usuario" aria-describedby="">
+                                                <input id="usuariotxt" name="usuariotxt" type="text" class="form-control" placeholder="Número de Usuario" aria-describedby="">
                                             </div>
                                             <br>
                                             <label>Numero de Peticiones:</label>
@@ -158,10 +158,10 @@
                                             </div>
                                             <br>
 
-                                            <label>Condicion:</label>
+                                            <label>Condición:</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon" id=""></span>
-                                                <input name="parametrotxt" id="parametrotxt" type="text" class="form-control" placeholder="Parametro" aria-describedby="">
+                                                <input name="parametrotxt" id="parametrotxt" type="text" class="form-control" placeholder="Condición" aria-describedby="">
                                             </div>
                                             <br>
 
@@ -189,7 +189,64 @@
                                 </div>
                                 <div class="panel-body">
 
+                                    <div class="col-md-offset-1">
+                                        <div class="col-md-6">
+                                            <label>Llave OTP:</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon" id=""></span>
+                                                <input name="llaveOTP" id="llaveOTP" type="text" class="form-control" placeholder="Llave OTP" aria-describedby="">
+                                            </div>
+                                            <br>
 
+                                            <label>Tipo Acción:</label>
+                                            <div class="input-group col-md-4">
+                                                <select class="form-control" id="tipoAccion" name="tipoAccion">
+                                                    <option value="SELECT">SELECT</option>
+                                                    <option value="INSERT">INSERT</option>
+                                                    <option value="UPDATE">UPDATE</option>
+                                                    <option value="DELETE">DELETE</option>
+                                                </select>
+                                            </div>
+                                            <br>
+
+                                            <label>ID:</label>
+                                            <div class="input-group col-md-3">
+                                                <span class="input-group-addon" id=""></span>
+                                                <input value="53" min="10" max="99" id="idTxt" name="idTxt" type="number" class="form-control">
+                                            </div>
+                                            <br>
+
+                                            <label>Tipo Acción:</label>
+                                            <div class="input-group col-md-4">
+                                                <select class="form-control" id="tipoAccion2" name="tipoAccion2">
+                                                    <option value="INPU">INPU</option>
+                                                    <option value="OUTP">OUTP</option>
+                                                </select>
+                                            </div>
+                                            <br>
+
+                                            <label>Dato:</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon" id=""></span>
+                                                <input name="datoTxt" id="datoTxt" type="text" class="form-control" placeholder="Dato" aria-describedby="">
+                                            </div>
+                                            <br>
+
+                                            <label>STAT:</label>
+                                            <div class="input-group col-md-4">
+                                                <select class="form-control" id="statTxt" name="statTxt">
+                                                    <option value="A1">A1</option>
+                                                    <option value="B1">B1</option>
+                                                    <option value="C1">C1</option>
+                                                </select>
+                                            </div>
+                                            <br>
+
+                                            <div class="form-inline">
+                                                <button onclick="consultaMTTOPARA();" class="btn btn-success btn-sm" role="button">Aceptar</button>
+                                                <button onclick="refresh();" class="btn btn-danger btn-sm" role="button" >Limpiar</button>                                        </div>
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>
