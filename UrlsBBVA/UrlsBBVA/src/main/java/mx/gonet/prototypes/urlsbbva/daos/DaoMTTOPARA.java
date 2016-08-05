@@ -23,7 +23,7 @@ public class DaoMTTOPARA {
         //consultaDePeticion("");
     }
 
-    public Map consultaDePeticion(String llaveOTP, String tipoAccion, String idTxt, String tipoAccion2, String datoTxt, String statTxt) {
+    public Map consultaDePeticion(String llaveOTP, String tipoAccion, String idTxt, String tipoAccion2, String secuenciaTxt, String datoTxt, String statTxt) {
         Map mapaDatos = new HashMap();
         try {
 
@@ -35,7 +35,7 @@ public class DaoMTTOPARA {
             today = new Date();
             fecha = formatter.format(today);
 
-            String httpsURL = "https://www.bancomermovil.com/mbhxp_mx_web/servlet/ServletOperacionWeb?OPERACION=BAN2O05&LOCALE=es_ES&PAR_INICIO.0={\"operacion\":\"pruebaKZML\",\"concepto\":\"MTTOPARA;" + llaveOTP + ";" + tipoAccion + ";" + idTxt + ";" + tipoAccion2 + ";00000001;" + datoTxt + ";" + statTxt + ";\"}";
+            String httpsURL = "https://www.bancomermovil.com/mbhxp_mx_web/servlet/ServletOperacionWeb?OPERACION=BAN2O05&LOCALE=es_ES&PAR_INICIO.0={\"operacion\":\"pruebaKZML\",\"concepto\":\"MTTOPARA;" + llaveOTP + ";" + tipoAccion + ";" + idTxt + ";" + tipoAccion2 + ";" + secuenciaTxt + ";" + datoTxt + ";" + statTxt + ";\"}";
             System.out.println(httpsURL);
             URL myurl = new URL(httpsURL);
             HttpsURLConnection con = (HttpsURLConnection) myurl.openConnection();

@@ -49,6 +49,57 @@ $(document).ready(function () {
     });
 });
 
+function maxnum100() {
+    var numero = $('#selectNumPeticiones').val();
+    if (numero > 100) {
+        $('#selectNumPeticiones').val("100");
+    }
+    if (numero <= 0) {
+        $('#selectNumPeticiones').val("1");
+    }
+}
+
+function validaOTP() {
+    var parametrotxt = $('#llaveOTPtxt').val().length > 0 ? $('#llaveOTPtxt').val() : $('#llaveOTP').val();
+    for (var i = 0; i < parametrotxt.length; i++) {
+        var valorAscii = parametrotxt.charCodeAt(i);
+        console.log(valorAscii);
+        if ((valorAscii >= 65 && valorAscii <= 90) || (valorAscii >= 97 && valorAscii <= 122)) {
+            $(this).val("" + parametrotxt.substring(0, i - 1));
+        }
+    }
+}
+
+
+
+$('input').on('keydown', function (e)
+{
+//    eliminar caracteres dif a num y cadena
+//    var parametrotxt = $('#llaveOTPtxt').val().length > 0 ? $('#llaveOTPtxt').val() : $('#llaveOTP').val();
+//    console.log(parametrotxt+"");
+//    for (var i = 0; i < parametrotxt.length; i++) {
+//        var valorAscii = parametrotxt.charCodeAt(i);
+//        console.log(valorAscii);
+//        if ((valorAscii >= 65 && valorAscii <= 90) || (valorAscii >= 97 && valorAscii <= 122)) {
+//            $(this).val("" + parametrotxt.substring(0, i));
+//        }
+//    }
+    // Visually Friendly Auto-Uppercase
+    var $this = $(this);
+
+    // 1. Length of 1, hitting backspace, remove class.
+    if ($this.val().length == 1 && e.which == 8)
+    {
+        $this.removeClass('text-uppercase');
+    }
+
+    // 2. Length of 0, hitting character, add class.
+    if ($this.val().length == 0 && e.which >= 65 && e.which <= 90)
+    {
+        $this.addClass('text-uppercase');
+    }
+});
+
 function refresh() {
     var context = $('#contexto').val();
     $.ajax({
@@ -80,17 +131,19 @@ function refresh() {
             $('#selectNumPeticiones').val("1");
             var llaveOTPtxt = $('#llaveOTPtxt').val("");
             var selTipo = $('#selTipo').val("ADD");
-            var parametrotxt = $('#parametrotxt').val("");
+            var parametrotxt = $('#parametrotxt').val("SAJCYCPD_OK_PR");
             var d = new Date();
             var datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + d.getFullYear();
             $('#datepickerD').val(datestring);
 
             $('#llaveOTP').val("");
             $('#tipoAccion').val("SELECT");
-            $('#idTxt').val("53");
-            $('#tipoAccion2').val("INPU");
+            $('#idTxt').val("");
+            $('#tipoAccion2').val("");
             $('#datoTxt').val("");
             $('#statTxt').val("A1");
+            $('#otrotxt').val("");
+            $('#secuenciaTxt').val("");
         }
     });
 }
@@ -143,7 +196,7 @@ function consultaPorOTP() {
     var context = $('#contexto').val();
     var llaveOTPtxt = $('#llaveOTPtxt').val().trim();
     var selTipo = $('#selTipo').val();
-    var parametrotxt = $('#parametrotxt').val().trim();
+    var parametrotxt = $('#otrotxt').val().trim().length > 0 ? $('#otrotxt').val().trim() : $('#parametrotxt').val();
     var datepickerD = $('#datepickerD').val().trim();
 
     var mensaje = llaveOTPtxt.length > 0 ?
@@ -202,12 +255,19 @@ function consultaMTTOPARA() {
     var tipoAccion = $('#tipoAccion').val();
     var idTxt = $('#idTxt').val().trim();
     var tipoAccion2 = $('#tipoAccion2').val().trim();
+    var secuenciaTxt = $('#secuenciaTxt').val().trim();
     var datoTxt = $('#datoTxt').val().trim();
     var statTxt = $('#statTxt').val().trim();
 
     var mensaje = llaveOTP.length > 0 ?
+            idTxt.length > 0 ?
+            tipoAccion2.length > 0 ?
+            secuenciaTxt.length > 0 ?
             datoTxt.length > 0 ?
             "" : "El campo Dato esta vacio"
+            : "El campo Secuencia esta vacio"
+            : "El campo Subtabla esta vacio"
+            : "El campo Tabla esta vacio"
             : "El campo Llave OTP esta vacio";
 
     if (mensaje.length === 0) {
@@ -220,6 +280,7 @@ function consultaMTTOPARA() {
                 tipoAccion: tipoAccion,
                 idTxt: idTxt,
                 tipoAccion2: tipoAccion2,
+                secuenciaTxt: secuenciaTxt,
                 datoTxt: datoTxt,
                 statTxt: statTxt
             },

@@ -48,7 +48,7 @@ public class DaoOTPUrl {
             while ((inputLine = in.readLine()) != null) {
                 outputreturn += inputLine;
             }
-            mapaDatos.put("operacion", "OTP");
+            mapaDatos.put("operacion", "Control-M");
             mapaDatos.put("url", httpsURL);
             mapaDatos.put("data", outputreturn);
             mapaDatos.put("fecha", fecha);

@@ -54,16 +54,16 @@
                 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav side-nav">
-                        <li id="peticionList" class="">
+                        <li id="peticionList" class="" onclick="refresh();">
                             <a href="#"><i class="fa fa-fw fa-codepen"></i> Petición</a>
                         </li>
-                        <li id="usoOtpList">
+                        <li id="usoOtpList" onclick="refresh();">
                             <a href="#"><i class="fa fa-fw fa-delicious"></i> Control-M</a>
                         </li>
-                        <li id="mttoList">
-                            <a href="#"><i class="fa fa-fw fa-empire"></i> MTTOPARA</a>
+                        <li id="mttoList" onclick="refresh();">
+                            <a href="#"><i class="fa fa-fw fa-empire"></i> Mtto Para</a>
                         </li>
-                        <li id="lastList">
+                        <li id="lastList" onclick="refresh();">
                             <a href="#"><i class="fa fa-fw fa-ils"></i> Por Definir</a>
                         </li>
                         <!--
@@ -120,7 +120,7 @@
                                             <label>Numero de Peticiones:</label>
                                             <div class="input-group col-md-3">
                                                 <span class="input-group-addon" id=""></span>
-                                                <input value="1" min="1" max="100" id="selectNumPeticiones" name="selectNumPeticiones" type="number" class="form-control">
+                                                <input onChange="maxnum100();" value="1" min="1" max="100" id="selectNumPeticiones" name="selectNumPeticiones" type="number" class="form-control">
                                             </div>
                                             <br>
                                             <div class="form-inline">
@@ -154,14 +154,22 @@
                                             <label>Llave OTP:</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon" id=""></span>
-                                                <input name="llaveOTPtxt" id="llaveOTPtxt" type="text" class="form-control" placeholder="Llave OTP" aria-describedby="">
+                                                <input minlength="16" maxlength="16" name="llaveOTPtxt" id="llaveOTPtxt" type="text" class="form-control" placeholder="Llave OTP" aria-describedby="">
                                             </div>
                                             <br>
 
                                             <label>Condición:</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon" id=""></span>
-                                                <input name="parametrotxt" id="parametrotxt" type="text" class="form-control" placeholder="Condición" aria-describedby="">
+                                            <div class="input-group form-group row">
+                                                <div class="col-md-6">
+                                                    <select class="form-control" id="parametrotxt" name="parametrotxt">
+                                                        <option value="SAJCYCPD_OK_PR">SAJCYCPD_OK_PR</option>
+                                                        <option value="NSACRID2_OK_PR">NSACRID2_OK_PR</option>
+                                                        <option value="KZJCGERA_OK_PR">KZJCGERA_OK_PR</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <input name="otrotxt" id="otrotxt" type="text" class="form-control" placeholder="Otra Condición" >
+                                                </div>
                                             </div>
                                             <br>
 
@@ -185,7 +193,7 @@
 
                             <div id="mttoDiv" class="panel panel-default" style="display: none;">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="fa fa-fw fa-empire"></i> MTTOPARA</h3>
+                                    <h3 class="panel-title"><i class="fa fa-fw fa-empire"></i> Mtto Para</h3>
                                 </div>
                                 <div class="panel-body">
 
@@ -194,7 +202,7 @@
                                             <label>Llave OTP:</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon" id=""></span>
-                                                <input name="llaveOTP" id="llaveOTP" type="text" class="form-control" placeholder="Llave OTP" aria-describedby="">
+                                                <input minlength="16" maxlength="16" name="llaveOTP" id="llaveOTP" type="text" class="form-control" placeholder="Llave OTP" aria-describedby="">
                                             </div>
                                             <br>
 
@@ -209,19 +217,29 @@
                                             </div>
                                             <br>
 
-                                            <label>ID:</label>
-                                            <div class="input-group col-md-3">
+                                            <label>Tabla:</label>
+                                            <div class="input-group col-md-2">
                                                 <span class="input-group-addon" id=""></span>
-                                                <input value="53" min="10" max="99" id="idTxt" name="idTxt" type="number" class="form-control">
+                                                <input minlength="1" maxlength="2" id="idTxt" name="idTxt" type="text" placeholder="53" class="form-control">
                                             </div>
                                             <br>
 
-                                            <label>Tipo Acción:</label>
-                                            <div class="input-group col-md-4">
-                                                <select class="form-control" id="tipoAccion2" name="tipoAccion2">
+                                            <label>Subtabla:</label>
+                                            <div class="input-group col-md-3">
+                                                <span class="input-group-addon" id=""></span>
+                                                <input minlength="1" maxlength="4" id="tipoAccion2" name="tipoAccion2" type="text" placeholder="INPU" class="form-control">
+                                            
+<!--                                                <select class="form-control" id="tipoAccion2" name="tipoAccion2">
                                                     <option value="INPU">INPU</option>
                                                     <option value="OUTP">OUTP</option>
-                                                </select>
+                                                </select>-->
+                                            </div>
+                                            <br>
+                                            
+                                            <label>Secuencia:</label>
+                                            <div class="input-group col-md-4">
+                                                <span class="input-group-addon" id=""></span>
+                                                <input minlength="1" maxlength="8" id="secuenciaTxt" name="secuenciaTxt" type="text" placeholder="00000001" class="form-control">
                                             </div>
                                             <br>
 
@@ -232,7 +250,7 @@
                                             </div>
                                             <br>
 
-                                            <label>STAT:</label>
+                                            <label>Estado:</label>
                                             <div class="input-group col-md-4">
                                                 <select class="form-control" id="statTxt" name="statTxt">
                                                     <option value="A1">A1</option>
@@ -316,7 +334,6 @@
         <script src="<%=context%>/js/bootstrap.min.js"></script>
 
         <!-- Table JavaScript -->
-        <!--<script src="<%=context%>/js/dataTables.min.js"></script>-->
         <script src="<%=context%>/js/jquery.dataTables.min.js"></script>
         <script src="<%=context%>/js/dataTables.bootstrap.js"></script>
 

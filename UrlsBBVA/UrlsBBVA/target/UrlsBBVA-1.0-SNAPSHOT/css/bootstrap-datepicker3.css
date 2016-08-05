@@ -721,7 +721,7 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
   background-color: transparent;
 }
 .input-group.date .input-group-addon {
-  cursor: pointer;
+  cursor: default;
 }
 .input-daterange {
   width: 100%;

@@ -76,10 +76,11 @@ public class ServletUrls extends HttpServlet {
                 String tipoAccion = request.getParameter("tipoAccion");
                 String idTxt = request.getParameter("idTxt");
                 String tipoAccion2 = request.getParameter("tipoAccion2");
+                String secuenciaTxt = request.getParameter("secuenciaTxt");
                 String datoTxt = request.getParameter("datoTxt");
                 String statTxt = request.getParameter("statTxt");
 
-                listadoRespuestas.add(daoMTTO.consultaDePeticion(llaveOTP, tipoAccion, idTxt, tipoAccion2, datoTxt, statTxt));
+                listadoRespuestas.add(daoMTTO.consultaDePeticion(llaveOTP, tipoAccion, idTxt, tipoAccion2, secuenciaTxt, datoTxt, statTxt));
 
                 out.print(gson.toJson(listadoRespuestas));
                 break;
