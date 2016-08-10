@@ -9,11 +9,13 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mx.gonet.prototypes.urlsbbva.daos.DaoCopias;
 import mx.gonet.prototypes.urlsbbva.daos.DaoMTTOPARA;
 import mx.gonet.prototypes.urlsbbva.daos.DaoOTPUrl;
 import mx.gonet.prototypes.urlsbbva.daos.DaoPeticionUrl;
@@ -38,6 +40,7 @@ public class ServletUrls extends HttpServlet {
     static final String RefreshList = "2";
     static final String UrlTipoOTP = "3";
     static final String UrlMTTOPARA = "4";
+    static final String UrlCopias = "5";
     ArrayList listadoRespuestas = new ArrayList();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -53,7 +56,7 @@ public class ServletUrls extends HttpServlet {
                 String user = request.getParameter("usuariotxt");
                 int numPeticiones = Integer.parseInt(request.getParameter("selectNumPeticiones"));
                 for (int i = 0; i < numPeticiones; i++) {
-                    listadoRespuestas.add(daoPet.consultaDePeticion(user));
+                    listadoRespuestas.add(0, daoPet.consultaDePeticion(user));
                 }
                 out.print(gson.toJson(listadoRespuestas));
                 break;
@@ -65,7 +68,7 @@ public class ServletUrls extends HttpServlet {
                 String parametrotxt = request.getParameter("parametrotxt");
                 String datepickerD = request.getParameter("datepickerD");
                 String fechaPeticion = datepickerD.substring(0, 2) + ";" + datepickerD.substring(3, 5);
-                listadoRespuestas.add(daoOtp.consultaDePeticion(llaveOTPtxt, selTipo, parametrotxt, fechaPeticion));
+                listadoRespuestas.add(0, daoOtp.consultaDeOTP(llaveOTPtxt, selTipo, parametrotxt, fechaPeticion));
 
                 out.print(gson.toJson(listadoRespuestas));
                 break;
@@ -80,7 +83,34 @@ public class ServletUrls extends HttpServlet {
                 String datoTxt = request.getParameter("datoTxt");
                 String statTxt = request.getParameter("statTxt");
 
-                listadoRespuestas.add(daoMTTO.consultaDePeticion(llaveOTP, tipoAccion, idTxt, tipoAccion2, secuenciaTxt, datoTxt, statTxt));
+                listadoRespuestas.add(0, daoMTTO.consultaDeMTTO(llaveOTP, tipoAccion, idTxt, tipoAccion2, secuenciaTxt, datoTxt, statTxt));
+
+                out.print(gson.toJson(listadoRespuestas));
+                break;
+
+            case UrlCopias:
+                DaoCopias daoCopia = new DaoCopias();
+                String origenTxt = request.getParameter("origenTxt");
+                String resorigenTxt = origenTxt.substring(0, 30);
+                String llaveOTPOrigen = request.getParameter("llaveOTPOrigen");
+                String llaveOTPOrigen2 = request.getParameter("llaveOTPOrigen2");
+
+                String destinoTxt = request.getParameter("destinoTxt");
+                String resdestinoTxt = origenTxt.substring(0, 30);
+                String llaveOTPODestino = request.getParameter("llaveOTPODestino");
+                String llaveOTPODestino2 = request.getParameter("llaveOTPODestino2");
+
+                listadoRespuestas.add(0, daoCopia.consultaDeCopiasOrigen(resorigenTxt, llaveOTPOrigen, "00000001"));
+                if (llaveOTPOrigen2.length() > 0) {
+                    String resorigenTxt2 = origenTxt.substring(30, origenTxt.length());
+                    listadoRespuestas.add(0, daoCopia.consultaDeCopiasOrigen(resorigenTxt2, llaveOTPOrigen2, "00000002"));
+                }
+
+                listadoRespuestas.add(0, daoCopia.consultaDeCopiasDestino(resdestinoTxt, llaveOTPODestino, "00000001"));
+                if (llaveOTPODestino2.length() > 0) {
+                    String resdestinoTxt2 = origenTxt.substring(30, destinoTxt.length());
+                    listadoRespuestas.add(0, daoCopia.consultaDeCopiasDestino(resdestinoTxt2, llaveOTPODestino2, "00000002"));
+                }
 
                 out.print(gson.toJson(listadoRespuestas));
                 break;

@@ -23,7 +23,7 @@ public class DaoMTTOPARA {
         //consultaDePeticion("");
     }
 
-    public Map consultaDePeticion(String llaveOTP, String tipoAccion, String idTxt, String tipoAccion2, String secuenciaTxt, String datoTxt, String statTxt) {
+    public Map consultaDeMTTO(String llaveOTP, String tipoAccion, String idTxt, String tipoAccion2, String secuenciaTxt, String datoTxt, String statTxt) {
         Map mapaDatos = new HashMap();
         try {
 

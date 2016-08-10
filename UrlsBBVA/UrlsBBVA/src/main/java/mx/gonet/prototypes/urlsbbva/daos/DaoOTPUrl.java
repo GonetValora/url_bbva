@@ -23,7 +23,7 @@ public class DaoOTPUrl {
         //consultaDePeticion("");
     }
 
-    public Map consultaDePeticion(String llaveOTPtxt, String selTipo, String parametrotxt, String fechaPeticion) {
+    public Map consultaDeOTP(String llaveOTPtxt, String selTipo, String parametrotxt, String fechaPeticion) {
         Map mapaDatos = new HashMap();
         try {
 

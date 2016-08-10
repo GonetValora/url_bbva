@@ -54,17 +54,17 @@
                 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav side-nav">
-                        <li id="peticionList" class="" onclick="refresh();">
+                        <li id="peticionList" class="" onclick="refreshDatos();">
                             <a href="#"><i class="fa fa-fw fa-codepen"></i> Petición</a>
                         </li>
-                        <li id="usoOtpList" onclick="refresh();">
+                        <li id="usoOtpList" onclick="refreshDatos();">
                             <a href="#"><i class="fa fa-fw fa-delicious"></i> Control-M</a>
                         </li>
-                        <li id="mttoList" onclick="refresh();">
+                        <li id="mttoList" onclick="refreshDatos();">
                             <a href="#"><i class="fa fa-fw fa-empire"></i> Mtto Para</a>
                         </li>
-                        <li id="lastList" onclick="refresh();">
-                            <a href="#"><i class="fa fa-fw fa-ils"></i> Por Definir</a>
+                        <li id="lastList" onclick="refreshDatos();">
+                            <a href="#"><i class="fa fa-fw fa-ils"></i> Copias</a>
                         </li>
                         <!--
                         <li>
@@ -112,9 +112,9 @@
                                         <input type="hidden" value="1" id="opcion" name="opcion">
                                         <div class="col-md-6">
                                             <label>Número de Usuario:</label>
-                                            <div class="input-group">
+                                            <div class="input-group col-md-6">
                                                 <span class="input-group-addon" id=""></span>
-                                                <input id="usuariotxt" name="usuariotxt" type="text" class="form-control" placeholder="Número de Usuario" aria-describedby="">
+                                                <input minlength="1" maxlength="4" id="usuariotxt" name="usuariotxt" type="text" class="form-control text-uppercase" placeholder="Número de Usuario" aria-describedby="">
                                             </div>
                                             <br>
                                             <label>Numero de Peticiones:</label>
@@ -152,23 +152,25 @@
                                             <br>
 
                                             <label>Llave OTP:</label>
-                                            <div class="input-group">
+                                            <div class="input-group col-md-7">
                                                 <span class="input-group-addon" id=""></span>
-                                                <input minlength="16" maxlength="16" name="llaveOTPtxt" id="llaveOTPtxt" type="text" class="form-control" placeholder="Llave OTP" aria-describedby="">
+                                                <input minlength="20" maxlength="20" name="llaveOTPtxt" id="llaveOTPtxt" type="text" class="form-control text-uppercase" placeholder="Llave OTP" aria-describedby="">
                                             </div>
                                             <br>
 
                                             <label>Condición:</label>
                                             <div class="input-group form-group row">
                                                 <div class="col-md-6">
-                                                    <select class="form-control" id="parametrotxt" name="parametrotxt">
+                                                    <select class="form-control" id="parametrotxt" name="parametrotxt" onchange="myFunctionOtro()">
                                                         <option value="SAJCYCPD_OK_PR">SAJCYCPD_OK_PR</option>
                                                         <option value="NSACRID2_OK_PR">NSACRID2_OK_PR</option>
                                                         <option value="KZJCGERA_OK_PR">KZJCGERA_OK_PR</option>
+                                                        <option value="OTRO">Otra Condición</option>
                                                     </select>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <input name="otrotxt" id="otrotxt" type="text" class="form-control" placeholder="Otra Condición" >
+                                                <div class="col-md-6 input-group">
+                                                    <span class="input-group-addon" id=""></span>
+                                                    <input minlength="1" disabled="true" class="form-control text-uppercase" name="otrotxt" id="otrotxt" type="text" placeholder="Otra Condición" >
                                                 </div>
                                             </div>
                                             <br>
@@ -177,21 +179,22 @@
                                             <div class="input-group col-md-4">
                                                 <div class="input-group date">
                                                     <span class="input-group-addon"></span>
-                                                    <input pattern="(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}" id="datepickerD" id="datepickerD" placeholder="Fecha" name="datepickerD" type="text" onchange="cambiarColor(this.id)" class="form-control">
+                                                    <input pattern="(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}" id="datepickerD" id="datepickerD" placeholder="Fecha" name="datepickerD" type="text" class="form-control">
                                                 </div>
                                             </div>
                                             <br>
 
                                             <div class="form-inline">
                                                 <button onclick="consultaPorOTP();" class="btn btn-success btn-sm" role="button">Aceptar</button>
-                                                <button onclick="refresh();" class="btn btn-danger btn-sm" role="button" >Limpiar</button>                                        </div>
+                                                <button onclick="refresh();" class="btn btn-danger btn-sm" role="button" >Limpiar</button>                                        
+                                            </div>
                                         </div>
                                     </div>
 
                                 </div>
                             </div>
 
-                            <div id="mttoDiv" class="panel panel-default" style="display: none;">
+                            <div id="mttoDiv" class="panel panel-primary" style="display: none;">
                                 <div class="panel-heading">
                                     <h3 class="panel-title"><i class="fa fa-fw fa-empire"></i> Mtto Para</h3>
                                 </div>
@@ -200,9 +203,9 @@
                                     <div class="col-md-offset-1">
                                         <div class="col-md-6">
                                             <label>Llave OTP:</label>
-                                            <div class="input-group">
+                                            <div class="input-group col-md-7">
                                                 <span class="input-group-addon" id=""></span>
-                                                <input minlength="16" maxlength="16" name="llaveOTP" id="llaveOTP" type="text" class="form-control" placeholder="Llave OTP" aria-describedby="">
+                                                <input minlength="20" maxlength="20" name="llaveOTP" id="llaveOTP" type="text" class="form-control text-uppercase" placeholder="Llave OTP" aria-describedby="">
                                             </div>
                                             <br>
 
@@ -228,14 +231,9 @@
                                             <div class="input-group col-md-3">
                                                 <span class="input-group-addon" id=""></span>
                                                 <input minlength="1" maxlength="4" id="tipoAccion2" name="tipoAccion2" type="text" placeholder="INPU" class="form-control">
-                                            
-<!--                                                <select class="form-control" id="tipoAccion2" name="tipoAccion2">
-                                                    <option value="INPU">INPU</option>
-                                                    <option value="OUTP">OUTP</option>
-                                                </select>-->
                                             </div>
                                             <br>
-                                            
+
                                             <label>Secuencia:</label>
                                             <div class="input-group col-md-4">
                                                 <span class="input-group-addon" id=""></span>
@@ -244,9 +242,9 @@
                                             <br>
 
                                             <label>Dato:</label>
-                                            <div class="input-group">
+                                            <div class="input-group col-md-10">
                                                 <span class="input-group-addon" id=""></span>
-                                                <input name="datoTxt" id="datoTxt" type="text" class="form-control" placeholder="Dato" aria-describedby="">
+                                                <input onkeypress="soloLetras(event)" minlength="1" maxlength="30" name="datoTxt" id="datoTxt" type="text" class="form-control" placeholder="Dato" aria-describedby="">
                                             </div>
                                             <br>
 
@@ -262,21 +260,76 @@
 
                                             <div class="form-inline">
                                                 <button onclick="consultaMTTOPARA();" class="btn btn-success btn-sm" role="button">Aceptar</button>
-                                                <button onclick="refresh();" class="btn btn-danger btn-sm" role="button" >Limpiar</button>                                        </div>
+                                                <button onclick="refresh();" class="btn btn-danger btn-sm" role="button" >Limpiar</button>                                        
+                                            </div>
                                         </div>
                                     </div>
 
                                 </div>
                             </div>
 
-                            <div id="lastDiv" class="panel panel-default" style="display: none;">
+                            <div id="lastDiv" class="panel panel-primary" style="display: none;">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="fa fa-fw fa-ils"></i> Por Definir</h3>
+                                    <h3 class="panel-title"><i class="fa fa-fw fa-ils"></i> Copias</h3>
                                 </div>
                                 <div class="panel-body">
+                                    <div class="col-md-offset-1">
+                                        <div class="col-md-6">
+
+                                            <label>Archivo Origen:</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon" id=""></span>
+                                                <input onkeyup="llaveOTPOrigenTam()" minlength="30" maxlength="44" name="origenTxt" id="origenTxt" type="text" class="form-control text-uppercase" placeholder="Archivo Origen" aria-describedby="">
+                                            </div>
+                                            <br>
+
+                                            <label>Llave OTP Origen:</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon" id=""></span>
+                                                <input disabled="true" minlength="20" maxlength="20" name="llaveOTPOrigen" id="llaveOTPOrigen" type="text" class="form-control" placeholder="Llave OTP Origen" aria-describedby="">
+                                            </div>
+                                            <br>
+
+                                            <div id="segundaLlaveOrigen" name="segundaLlaveOrigen">
+                                                <label>Segunda Llave OTP Origen:</label>
+                                                <div class="input-group col-md-10">
+                                                    <span class="input-group-addon" id=""></span>
+                                                    <input disabled="true" minlength="20" maxlength="20" name="llaveOTPOrigen2" id="llaveOTPOrigen2" type="text" class="form-control" placeholder="Segunda Llave OTP Origen" aria-describedby="">
+                                                </div>
+                                                <br>  
+                                            </div>
 
 
+                                            <label>Archivo Destino:</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon" id=""></span>
+                                                <input onkeyup="llaveOTPDesrinoTam()" minlength="30" maxlength="44" name="destinoTxt" id="destinoTxt" type="text" class="form-control text-uppercase" placeholder="Archivo Destino" aria-describedby="">
+                                            </div>
+                                            <br>
 
+                                            <label>Llave OTP Destino:</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon" id=""></span>
+                                                <input disabled="true" minlength="20" maxlength="20" name="llaveOTPODestino" id="llaveOTPODestino" type="text" class="form-control" placeholder="Llave OTP Destino" aria-describedby="">
+                                            </div>
+                                            <br>
+
+                                            <div id="segundaLlaveDestino" name="segundaLlaveDestino">
+                                                <label>Segunda Llave OTP Destino:</label>
+                                                <div class="input-group col-md-10">
+                                                    <span class="input-group-addon" id=""></span>
+                                                    <input disabled="true" minlength="20" maxlength="20" name="llaveOTPODestino2" id="llaveOTPODestino2" type="text" class="form-control" placeholder="Segunda Llave OTP Destino" aria-describedby="">
+                                                </div>
+                                                <br>  
+                                            </div>
+
+                                            <div class="form-inline">
+                                                <button onclick="consultaCopia();" class="btn btn-success btn-sm" role="button">Aceptar</button>
+                                                <button onclick="refresh();" class="btn btn-danger btn-sm" role="button" >Limpiar</button>                                        
+                                            </div>
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -295,18 +348,18 @@
                                     <table id="tablaOperaciones" class="display table">
                                         <thead>
                                             <tr>
+                                                <th>Fecha</th>
                                                 <th>Tipo</th>
                                                 <th>URL</th>
                                                 <th>Data</th>
-                                                <th>Fecha</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
+                                                <th>Fecha</th>
                                                 <th>Tipo</th>
                                                 <th>URL</th>
                                                 <th>Data</th>
-                                                <th>Fecha</th>
                                             </tr>
                                         </tfoot>
                                         <tbody id="cuerpotablaOperaciones"></tbody>

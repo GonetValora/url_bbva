@@ -1,6 +1,7 @@
 mx/gonet/prototypes/urlsbbva/daos/DaoMTTOPARA.class
+utilerias/Ngin.class
+utilerias/MySQL_Connection.class
 mx/gonet/prototypes/urlsbbva/daos/DaoOTPUrl.class
 mx/gonet/prototypes/urlsbbva/daos/DaoPeticionUrl.class
 mx/gonet/prototypes/urlsbbva/servlets/ServletUrls.class
-utilerias/Ngin.class
-utilerias/MySQL_Connection.class
+mx/gonet/prototypes/urlsbbva/daos/DaoCopias.class

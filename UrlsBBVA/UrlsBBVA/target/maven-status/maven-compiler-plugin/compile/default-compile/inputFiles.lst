@@ -1,6 +1,7 @@
-/Users/macbookair/Documents/url_bbva/UrlsBBVA/UrlsBBVA/src/main/java/mx/gonet/prototypes/urlsbbva/servlets/ServletUrls.java
-/Users/macbookair/Documents/url_bbva/UrlsBBVA/UrlsBBVA/src/main/java/mx/gonet/prototypes/urlsbbva/daos/DaoMTTOPARA.java
-/Users/macbookair/Documents/url_bbva/UrlsBBVA/UrlsBBVA/src/main/java/mx/gonet/prototypes/urlsbbva/daos/DaoPeticionUrl.java
-/Users/macbookair/Documents/url_bbva/UrlsBBVA/UrlsBBVA/src/main/java/utilerias/MySQL_Connection.java
-/Users/macbookair/Documents/url_bbva/UrlsBBVA/UrlsBBVA/src/main/java/utilerias/Ngin.java
-/Users/macbookair/Documents/url_bbva/UrlsBBVA/UrlsBBVA/src/main/java/mx/gonet/prototypes/urlsbbva/daos/DaoOTPUrl.java
+/Users/eduardovalora/NetBeansProjects/url_bbva/UrlsBBVA/UrlsBBVA/src/main/java/mx/gonet/prototypes/urlsbbva/daos/DaoPeticionUrl.java
+/Users/eduardovalora/NetBeansProjects/url_bbva/UrlsBBVA/UrlsBBVA/src/main/java/utilerias/MySQL_Connection.java
+/Users/eduardovalora/NetBeansProjects/url_bbva/UrlsBBVA/UrlsBBVA/src/main/java/mx/gonet/prototypes/urlsbbva/daos/DaoCopias.java
+/Users/eduardovalora/NetBeansProjects/url_bbva/UrlsBBVA/UrlsBBVA/src/main/java/mx/gonet/prototypes/urlsbbva/servlets/ServletUrls.java
+/Users/eduardovalora/NetBeansProjects/url_bbva/UrlsBBVA/UrlsBBVA/src/main/java/mx/gonet/prototypes/urlsbbva/daos/DaoOTPUrl.java
+/Users/eduardovalora/NetBeansProjects/url_bbva/UrlsBBVA/UrlsBBVA/src/main/java/utilerias/Ngin.java
+/Users/eduardovalora/NetBeansProjects/url_bbva/UrlsBBVA/UrlsBBVA/src/main/java/mx/gonet/prototypes/urlsbbva/daos/DaoMTTOPARA.java
