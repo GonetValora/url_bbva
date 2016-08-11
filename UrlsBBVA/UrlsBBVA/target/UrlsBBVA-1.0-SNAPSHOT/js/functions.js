@@ -223,6 +223,8 @@ function ValidarOtp(dato) {
             } else {
                 return false;
             }
+        } else {
+            return false;
         }
     } catch (e) {
         return false;
