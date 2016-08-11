@@ -97,7 +97,6 @@ function refresh() {
             refreshDatos();
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            refreshDatos();
             var table = $('#tablaOperaciones').DataTable();
             table.destroy();
             $('#tablaOperaciones').empty();
@@ -174,7 +173,7 @@ function llaveOTPOrigenTam() {
 
 }
 
-function llaveOTPDesrinoTam() {
+function llaveOTPDestinoTam() {
     var dato = document.getElementById("destinoTxt").value;
     
     if (dato.length >= 1 && dato.length <= 30) {
