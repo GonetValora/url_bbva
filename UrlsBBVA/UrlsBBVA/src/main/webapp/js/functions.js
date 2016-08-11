@@ -88,12 +88,13 @@ function refresh() {
             $('#tablaOperaciones').empty();
             $('#tablaOperaciones').remove();
             var cuerpoT = '<table id="tablaOperaciones" class="display table">'
-                    + ' <thead><tr><th>Tipo</th><th>URL</th><th>Data</th><th>Fecha</th></tr></thead>'
+                    + ' <thead><tr><th>Fecha</th><th>Tipo</th><th>URL</th><th>Data</th></tr></thead>'
                     + '<tbody id="cuerpotablaOperaciones"></tbody>'
-                    + '<tfoot><tr><th>Tipo</th><th>URL</th><th>Data</th><th>Fecha</th></tr></tfoot>'
+                    + '<tfoot><tr><th>Fecha</th><th>Tipo</th><th>URL</th><th>Data</th></tr></tfoot>'
                     + '</table>';
             $('#contenedorTabla').append(cuerpoT);
             $('#tablaOperaciones').dataTable();
+            refreshDatos();
         },
         error: function (jqXHR, textStatus, errorThrown) {
             refreshDatos();
@@ -102,12 +103,13 @@ function refresh() {
             $('#tablaOperaciones').empty();
             $('#tablaOperaciones').remove();
             var cuerpoT = '<table id="tablaOperaciones" class="display table">'
-                    + ' <thead><tr><th>Tipo</th><th>URL</th><th>Data</th><th>Fecha</th></tr></thead>'
+                    + ' <thead><tr><th>Fecha</th><th>Tipo</th><th>URL</th><th>Data</th></tr></thead>'
                     + '<tbody id="cuerpotablaOperaciones"></tbody>'
-                    + '<tfoot><tr><th>Tipo</th><th>URL</th><th>Data</th><th>Fecha</th></tr></tfoot>'
+                    + '<tfoot><tr><th>Fecha</th><th>Tipo</th><th>URL</th><th>Data</th></tr></tfoot>'
                     + '</table>';
             $('#contenedorTabla').append(cuerpoT);
             $('#tablaOperaciones').dataTable();
+            refreshDatos();
         }
     });
 }
@@ -130,6 +132,16 @@ function refreshDatos() {
     $('#otrotxt').val("");
     $('#secuenciaTxt').val("");
     $('#otrotxt').addClass('disabled').attr('disabled', true);
+    $('#origenTxt').val("");
+    $('#llaveOTPOrigen').val("");
+    $('#llaveOTPOrigen2').val("");
+    $('#destinoTxt').val("");
+    $('#llaveOTPODestino').val("");
+    $('#llaveOTPODestino2').val("");
+    $('#llaveOTPOrigen').addClass('disabled').attr('disabled', true);
+    $('#llaveOTPOrigen2').addClass('disabled').attr('disabled', true);
+    $('#llaveOTPODestino').addClass('disabled').attr('disabled', true);
+    $('#llaveOTPODestino2').addClass('disabled').attr('disabled', true);
 }
 
 function soloLetras(e) {
@@ -149,31 +161,35 @@ function llaveOTPOrigenTam() {
         $('#llaveOTPOrigen').addClass('disabled').attr('disabled', false);
     } else {
         $('#llaveOTPOrigen').addClass('disabled').attr('disabled', true);
+//        $('#llaveOTPOrigen').val("");
     }
 
-    if (dato.length >= 31) {
+    if (dato.length >= 1 && dato.length >= 31) {
         $('#llaveOTPOrigen').addClass('disabled').attr('disabled', false);
         $('#llaveOTPOrigen2').addClass('disabled').attr('disabled', false);
     } else {
         $('#llaveOTPOrigen2').addClass('disabled').attr('disabled', true);
+        $('#llaveOTPOrigen2').val("");
     }
 
 }
 
 function llaveOTPDesrinoTam() {
     var dato = document.getElementById("destinoTxt").value;
-
+    
     if (dato.length >= 1 && dato.length <= 30) {
         $('#llaveOTPODestino').addClass('disabled').attr('disabled', false);
     } else {
         $('#llaveOTPODestino').addClass('disabled').attr('disabled', true);
+//        $('#llaveOTPODestino').val("");
     }
 
-    if (dato.length >= 31) {
+    if (dato.length >= 1 && dato.length >= 31) {
         $('#llaveOTPODestino').addClass('disabled').attr('disabled', false);
         $('#llaveOTPODestino2').addClass('disabled').attr('disabled', false);
     } else {
         $('#llaveOTPODestino2').addClass('disabled').attr('disabled', true);
+        $('#llaveOTPODestino2').val("");
     }
 }
 
@@ -226,10 +242,10 @@ function consultaPorPeticion() {
                 $('#cuerpotablaOperaciones').remove();
                 var cuerpoT = '<tbody id="cuerpotablaOperaciones">';
                 for (BuscadorObjeto in data) {
-                    cuerpoT += "<tr><td class='text-center'>" + data[BuscadorObjeto].operacion + "</td>"
-                            + "<td  class='text-center'>" + data[BuscadorObjeto].url + "</td>"
-                            + "<td class='text-center'>" + data[BuscadorObjeto].data + "</td>"
-                            + "<td class='text-center'>" + data[BuscadorObjeto].fecha + "</td></tr>"
+                    cuerpoT += "<tr><td class='text-center'>" + data[BuscadorObjeto].fecha + "</td>"
+                            + "<td  class='text-center'>" + data[BuscadorObjeto].operacion + "</td>"
+                            + "<td class='text-center'>" + data[BuscadorObjeto].url + "</td>"
+                            + "<td class='text-center'>" + data[BuscadorObjeto].data + "</td></tr>"
                 }
                 $('#tablaOperaciones').append(cuerpoT + '</tbody>');
                 $('#tablaOperaciones').dataTable();
@@ -255,7 +271,7 @@ function consultaPorOTP() {
     var llaveOTPtxt = $('#llaveOTPtxt').val().trim();
     var valiOTP = ValidarOtp(llaveOTPtxt);
     var selTipo = $('#selTipo').val();
-    var parametrotxt = $('#parametrotxt').val() === "OTRO" ? $('#otrotxt').val().trim().toUpperCase() : $('#parametrotxt').val();
+    var parametrotxt = $('#parametrotxt').val() === "OTRO" ? $('#otrotxt').val().trim() : $('#parametrotxt').val();
     var datepickerD = $('#datepickerD').val().trim();
 
     var mensaje = llaveOTPtxt.length > 0 ?
@@ -284,10 +300,10 @@ function consultaPorOTP() {
                 var cuerpoT = '<tbody id="cuerpotablaOperaciones">';
                 for (BuscadorObjeto in data) {
                     console.log(data[BuscadorObjeto].url + "");
-                    cuerpoT += "<tr><td class='text-center'>" + data[BuscadorObjeto].operacion + "</td>"
-                            + "<td  class='text-center'>" + data[BuscadorObjeto].url + "</td>"
-                            + "<td class='text-center'>" + data[BuscadorObjeto].data + "</td>"
-                            + "<td class='text-center'>" + data[BuscadorObjeto].fecha + "</td></tr>"
+                    cuerpoT += "<tr><td class='text-center'>" + data[BuscadorObjeto].fecha + "</td>"
+                            + "<td  class='text-center'>" + data[BuscadorObjeto].operacion + "</td>"
+                            + "<td class='text-center'>" + data[BuscadorObjeto].url + "</td>"
+                            + "<td class='text-center'>" + data[BuscadorObjeto].data + "</td></tr>"
                 }
                 $('#tablaOperaciones').append(cuerpoT + '</tbody>');
                 $('#tablaOperaciones').dataTable();
@@ -354,10 +370,10 @@ function consultaMTTOPARA() {
                 var cuerpoT = '<tbody id="cuerpotablaOperaciones">';
                 for (BuscadorObjeto in data) {
                     console.log(data[BuscadorObjeto].url + "");
-                    cuerpoT += "<tr><td class='text-center'>" + data[BuscadorObjeto].operacion + "</td>"
-                            + "<td  class='text-center'>" + data[BuscadorObjeto].url + "</td>"
-                            + "<td class='text-center'>" + data[BuscadorObjeto].data + "</td>"
-                            + "<td class='text-center'>" + data[BuscadorObjeto].fecha + "</td></tr>"
+                    cuerpoT += "<tr><td class='text-center'>" + data[BuscadorObjeto].fecha + "</td>"
+                            + "<td  class='text-center'>" + data[BuscadorObjeto].operacion + "</td>"
+                            + "<td class='text-center'>" + data[BuscadorObjeto].url + "</td>"
+                            + "<td class='text-center'>" + data[BuscadorObjeto].data + "</td></tr>"
                 }
                 $('#tablaOperaciones').append(cuerpoT + '</tbody>');
                 $('#tablaOperaciones').dataTable();
@@ -381,77 +397,68 @@ function consultaMTTOPARA() {
 function consultaCopia() {
     var context = $('#contexto').val();
     var origenTxt = $('#origenTxt').val().trim().toUpperCase();
+    var llaveOTPOrigen = $('#llaveOTPOrigen').val().trim();
+    var valiOTP = ValidarOtp(llaveOTPOrigen);
 
-    var llaveOTPOrigen;
-    var valiOTP;
-    if ($('#llaveOTPOrigen').prop("disabled") === false) {
-        llaveOTPOrigen = $('#llaveOTPOrigen').val().trim();
-        if (llaveOTPOrigen.length > 0 && llaveOTPOrigen.length <= 20) {
-            llaveOTPOrigen = $('#llaveOTPOrigen').val().trim();
-            valiOTP = ValidarOtp(llaveOTPOrigen);
-            if (valiOTP === false) {
-                alert("La llave OTP Origen no cumple con el formato numerico de 20 digitos");
-            }
-        } else {
-            llaveOTPOrigen = "No trae nada";
-        }
-    } else {
-        llaveOTPOrigen = "No trae nada";
-    }
 
     var llaveOTPOrigen2;
-    var valiOTP2;
-    if ($('#llaveOTPOrigen').prop("disabled") === false) {
+    var valiOTP3;
+    if ($('#llaveOTPOrigen2').prop("disabled") === false) {
         llaveOTPOrigen2 = $('#llaveOTPOrigen2').val().trim();
         if (llaveOTPOrigen2.length > 0 && llaveOTPOrigen2.length <= 20) {
-            llaveOTPOrigen2 = $('#llaveOTPOrigen').val().trim();
-            valiOTP2 = ValidarOtp(llaveOTPOrigen2);
-            if (valiOTP === false) {
-                alert("La Segunda llave OTP Origen no cumple con el formato numerico de 20 digitos");
+            llaveOTPOrigen2 = $('#llaveOTPOrigen2').val().trim();
+            valiOTP3 = ValidarOtp(llaveOTPOrigen2);
+            if (valiOTP3 === false) {
+                alert("La Segunda Llave OTP Origen no cumple con el formato numerico de 20 digitos");
             }
         } else {
-            llaveOTPOrigen2 = "No trae nada";
+            alert("La Segunda Llave OTP Origen no cumple con el formato numerico de 20 digitos");
+            llaveOTPOrigen2 = "";
         }
     } else {
-        llaveOTPOrigen2 = "No trae nada";
+        llaveOTPOrigen2 = "";
     }
+
 
     var destinoTxt = $('#destinoTxt').val().trim().toUpperCase();
-
-    var llaveOTPODestino;
-    var valiOTP3;
-    if ($('#llaveOTPODestino').prop("disabled") === false) {
-        llaveOTPODestino = $('#llaveOTPODestino').val().trim();
-        if (llaveOTPODestino.length > 0 && llaveOTPODestino.length <= 20) {
-            llaveOTPODestino = $('#llaveOTPODestino').val().trim();
-            valiOTP3 = ValidarOtp(llaveOTPODestino);
-        } else {
-            llaveOTPODestino = "No trae nada";
-        }
-    } else {
-        llaveOTPODestino = "";
-    }
+    var llaveOTPODestino = $('#llaveOTPODestino').val().trim();
+    var valiOTP2 = ValidarOtp(llaveOTPODestino);
 
     var llaveOTPODestino2;
-    var valiOTP4 = ValidarOtp(llaveOTPODestino2);
-    if ($('#llaveOTPODestino').prop("disabled") === false) {
+    var valiOTP4;
+
+    if ($('#llaveOTPODestino2').prop("disabled") === false) {
         llaveOTPODestino2 = $('#llaveOTPODestino2').val().trim();
+        if (llaveOTPODestino2.length > 0 && llaveOTPODestino2.length <= 20) {
+            llaveOTPODestino2 = $('#llaveOTPODestino2').val().trim();
+            valiOTP4 = ValidarOtp(llaveOTPODestino2);
+            if (valiOTP4 === false) {
+                alert("La Segunda Llave OTP Destino no cumple con el formato numerico de 20 digitos");
+            }
+        } else {
+            alert("La Segunda Llave OTP Destino no cumple con el formato numerico de 20 digitos");
+            llaveOTPODestino2 = "";
+        }
     } else {
         llaveOTPODestino2 = "";
     }
-
+//    var llaveOTPODestino2 = $('#llaveOTPODestino2').val().trim();
 
     var mensaje =
             origenTxt.length > 0 ?
-            origenTxt.length >= 30 ?
             destinoTxt.length > 0 ?
-            destinoTxt.length >= 30 ? ""
-            : "El campo Archivo Destino no cumple con el tamaño"
+            valiOTP === true ?
+            valiOTP2 === true ?
+            "" : "La Llave OTP Destino no cumple con el formato numerico de 20 digitos"
+            : "La Llave OTP Origen no cumple con el formato numerico de 20 digitos"
             : "El campo Archivo Destino esta vacio"
-            : "El campo Archivo Origen no cumple con el tamaño"
             : "El campo Archivo Origen esta vacio";
 
-    if (mensaje.length === 0) {
+
+    if (mensaje.length === 0 && valiOTP === true && valiOTP2 === true && valiOTP3 === true && valiOTP4 === true) {
+//        0 a 30 lanzar con 2
+//        31 0 mas lanza con 3
+//        31 0  mas lanza con 4
         $.ajax({
             type: "POST",
             url: context + '/ServletUrls',
@@ -472,10 +479,150 @@ function consultaCopia() {
                 var cuerpoT = '<tbody id="cuerpotablaOperaciones">';
                 for (BuscadorObjeto in data) {
                     console.log(data[BuscadorObjeto].url + "");
-                    cuerpoT += "<tr><td class='text-center'>" + data[BuscadorObjeto].operacion + "</td>"
-                            + "<td  class='text-center'>" + data[BuscadorObjeto].url + "</td>"
-                            + "<td class='text-center'>" + data[BuscadorObjeto].data + "</td>"
-                            + "<td class='text-center'>" + data[BuscadorObjeto].fecha + "</td></tr>"
+                    cuerpoT += "<tr><td class='text-center'>" + data[BuscadorObjeto].fecha + "</td>"
+                            + "<td  class='text-center'>" + data[BuscadorObjeto].operacion + "</td>"
+                            + "<td class='text-center'>" + data[BuscadorObjeto].url + "</td>"
+                            + "<td class='text-center'>" + data[BuscadorObjeto].data + "</td></tr>"
+                }
+                $('#tablaOperaciones').append(cuerpoT + '</tbody>');
+                $('#tablaOperaciones').dataTable();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+            },
+            beforeSend: function (jqXHR, settings) {
+                $("#loaderDiv").show();
+                $("#containerDiv").hide();
+            },
+            complete: function (jqXHR, textStatus) {
+                $("#loaderDiv").hide();
+                $("#containerDiv").show();
+            }
+        });
+    }
+
+
+    if (mensaje.length === 0 && valiOTP === true && ($('#llaveOTPOrigen2').prop("disabled") === true) === true && valiOTP2 === true && valiOTP4 === true) {
+//        0 a 30 lanzar con 2
+//        31 0 mas lanza con 3
+//        31 0  mas lanza con 4
+        $.ajax({
+            type: "POST",
+            url: context + '/ServletUrls',
+            data: {
+                opcion: '5',
+                origenTxt: origenTxt,
+                llaveOTPOrigen: llaveOTPOrigen,
+                llaveOTPOrigen2: "",
+                destinoTxt: destinoTxt,
+                llaveOTPODestino: llaveOTPODestino,
+                llaveOTPODestino2: llaveOTPODestino2
+            },
+            dataType: "json",
+            success: function (data, textStatus, jqXHR) {
+                var table = $('#tablaOperaciones').DataTable();
+                table.destroy();
+                $('#cuerpotablaOperaciones').remove();
+                var cuerpoT = '<tbody id="cuerpotablaOperaciones">';
+                for (BuscadorObjeto in data) {
+                    console.log(data[BuscadorObjeto].url + "");
+                    cuerpoT += "<tr><td class='text-center'>" + data[BuscadorObjeto].fecha + "</td>"
+                            + "<td  class='text-center'>" + data[BuscadorObjeto].operacion + "</td>"
+                            + "<td class='text-center'>" + data[BuscadorObjeto].url + "</td>"
+                            + "<td class='text-center'>" + data[BuscadorObjeto].data + "</td></tr>"
+                }
+                $('#tablaOperaciones').append(cuerpoT + '</tbody>');
+                $('#tablaOperaciones').dataTable();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+            },
+            beforeSend: function (jqXHR, settings) {
+                $("#loaderDiv").show();
+                $("#containerDiv").hide();
+            },
+            complete: function (jqXHR, textStatus) {
+                $("#loaderDiv").hide();
+                $("#containerDiv").show();
+            }
+        });
+    }
+
+    if (mensaje.length === 0 && valiOTP === true && valiOTP3 === true && valiOTP2 === true && ($('#llaveOTPODestino2').prop("disabled") === false) === false) {
+//        0 a 30 lanzar con 2
+//        31 0 mas lanza con 3
+//        31 0  mas lanza con 4
+        $.ajax({
+            type: "POST",
+            url: context + '/ServletUrls',
+            data: {
+                opcion: '5',
+                origenTxt: origenTxt,
+                llaveOTPOrigen: llaveOTPOrigen,
+                llaveOTPOrigen2: llaveOTPOrigen2,
+                destinoTxt: destinoTxt,
+                llaveOTPODestino: llaveOTPODestino,
+                llaveOTPODestino2: ""
+            },
+            dataType: "json",
+            success: function (data, textStatus, jqXHR) {
+                var table = $('#tablaOperaciones').DataTable();
+                table.destroy();
+                $('#cuerpotablaOperaciones').remove();
+                var cuerpoT = '<tbody id="cuerpotablaOperaciones">';
+                for (BuscadorObjeto in data) {
+                    console.log(data[BuscadorObjeto].url + "");
+                    cuerpoT += "<tr><td class='text-center'>" + data[BuscadorObjeto].fecha + "</td>"
+                            + "<td  class='text-center'>" + data[BuscadorObjeto].operacion + "</td>"
+                            + "<td class='text-center'>" + data[BuscadorObjeto].url + "</td>"
+                            + "<td class='text-center'>" + data[BuscadorObjeto].data + "</td></tr>"
+                }
+                $('#tablaOperaciones').append(cuerpoT + '</tbody>');
+                $('#tablaOperaciones').dataTable();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+            },
+            beforeSend: function (jqXHR, settings) {
+                $("#loaderDiv").show();
+                $("#containerDiv").hide();
+            },
+            complete: function (jqXHR, textStatus) {
+                $("#loaderDiv").hide();
+                $("#containerDiv").show();
+            }
+        });
+    }
+
+
+
+
+
+    if (mensaje.length === 0 && valiOTP === true && valiOTP2 === true && ($('#llaveOTPOrigen2').prop("disabled") === false) === false && ($('#llaveOTPODestino2').prop("disabled") === false) === false) {
+//        0 a 30 lanzar con 2
+//        31 0 mas lanza con 3
+//        31 0  mas lanza con 4
+        $.ajax({
+            type: "POST",
+            url: context + '/ServletUrls',
+            data: {
+                opcion: '5',
+                origenTxt: origenTxt,
+                llaveOTPOrigen: llaveOTPOrigen,
+                llaveOTPOrigen2: "",
+                destinoTxt: destinoTxt,
+                llaveOTPODestino: llaveOTPODestino,
+                llaveOTPODestino2: ""
+            },
+            dataType: "json",
+            success: function (data, textStatus, jqXHR) {
+                var table = $('#tablaOperaciones').DataTable();
+                table.destroy();
+                $('#cuerpotablaOperaciones').remove();
+                var cuerpoT = '<tbody id="cuerpotablaOperaciones">';
+                for (BuscadorObjeto in data) {
+                    console.log(data[BuscadorObjeto].url + "");
+                    cuerpoT += "<tr><td class='text-center'>" + data[BuscadorObjeto].fecha + "</td>"
+                            + "<td  class='text-center'>" + data[BuscadorObjeto].operacion + "</td>"
+                            + "<td class='text-center'>" + data[BuscadorObjeto].url + "</td>"
+                            + "<td class='text-center'>" + data[BuscadorObjeto].data + "</td></tr>"
                 }
                 $('#tablaOperaciones').append(cuerpoT + '</tbody>');
                 $('#tablaOperaciones').dataTable();
@@ -494,6 +641,10 @@ function consultaCopia() {
     } else {
         alert(mensaje);
     }
+
+
+
+
 }
 
 //$("input").keypress(function () {

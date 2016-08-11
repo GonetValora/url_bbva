@@ -170,7 +170,7 @@
                                                 </div>
                                                 <div class="col-md-6 input-group">
                                                     <span class="input-group-addon" id=""></span>
-                                                    <input minlength="1" disabled="true" class="form-control text-uppercase" name="otrotxt" id="otrotxt" type="text" placeholder="Otra Condición" >
+                                                    <input minlength="1" disabled="true" class="form-control" name="otrotxt" id="otrotxt" type="text" placeholder="Otra Condición" >
                                                 </div>
                                             </div>
                                             <br>
@@ -279,7 +279,7 @@
                                             <label>Archivo Origen:</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon" id=""></span>
-                                                <input onkeyup="llaveOTPOrigenTam()" minlength="30" maxlength="44" name="origenTxt" id="origenTxt" type="text" class="form-control text-uppercase" placeholder="Archivo Origen" aria-describedby="">
+                                                <input onkeyup="llaveOTPOrigenTam()" minlength="1" maxlength="44" name="origenTxt" id="origenTxt" type="text" class="form-control text-uppercase" placeholder="Archivo Origen" aria-describedby="">
                                             </div>
                                             <br>
 
@@ -303,7 +303,7 @@
                                             <label>Archivo Destino:</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon" id=""></span>
-                                                <input onkeyup="llaveOTPDesrinoTam()" minlength="30" maxlength="44" name="destinoTxt" id="destinoTxt" type="text" class="form-control text-uppercase" placeholder="Archivo Destino" aria-describedby="">
+                                                <input onkeyup="llaveOTPDestinoTam()" minlength="1" maxlength="44" name="destinoTxt" id="destinoTxt" type="text" class="form-control text-uppercase" placeholder="Archivo Destino" aria-describedby="">
                                             </div>
                                             <br>
 
