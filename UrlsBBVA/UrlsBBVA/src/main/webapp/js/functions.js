@@ -154,41 +154,50 @@ function soloLetras(e) {
 }
 
 function llaveOTPOrigenTam() {
+
     var dato = document.getElementById("origenTxt").value;
-
-    if (dato.length >= 1 && dato.length <= 30) {
-        $('#llaveOTPOrigen').addClass('disabled').attr('disabled', false);
-    } else {
+    if (dato.match("([^a-zA-Z0-9_ ])+([^a-zA-Z0-9_ ])") !== null) {
+        alert("El formato no puede contener dos o más puntos seguidos");
         $('#llaveOTPOrigen').addClass('disabled').attr('disabled', true);
-//        $('#llaveOTPOrigen').val("");
-    }
-
-    if (dato.length >= 1 && dato.length >= 31) {
-        $('#llaveOTPOrigen').addClass('disabled').attr('disabled', false);
-        $('#llaveOTPOrigen2').addClass('disabled').attr('disabled', false);
-    } else {
         $('#llaveOTPOrigen2').addClass('disabled').attr('disabled', true);
-        $('#llaveOTPOrigen2').val("");
+    } else {
+        if (dato.length >= 1 && dato.length <= 30) {
+            $('#llaveOTPOrigen').addClass('disabled').attr('disabled', false);
+        } else {
+            $('#llaveOTPOrigen').addClass('disabled').attr('disabled', true);
+//        $('#llaveOTPOrigen').val("");
+        }
+        if (dato.length >= 1 && dato.length >= 31) {
+            $('#llaveOTPOrigen').addClass('disabled').attr('disabled', false);
+            $('#llaveOTPOrigen2').addClass('disabled').attr('disabled', false);
+        } else {
+            $('#llaveOTPOrigen2').addClass('disabled').attr('disabled', true);
+            $('#llaveOTPOrigen2').val("");
+        }
     }
-
 }
 
 function llaveOTPDestinoTam() {
     var dato = document.getElementById("destinoTxt").value;
-    
-    if (dato.length >= 1 && dato.length <= 30) {
-        $('#llaveOTPODestino').addClass('disabled').attr('disabled', false);
-    } else {
+    if (dato.match("([^a-zA-Z0-9_ ])+([^a-zA-Z0-9_ ])") !== null) {
+        alert("El formato no puede contener dos o más puntos seguidos");
         $('#llaveOTPODestino').addClass('disabled').attr('disabled', true);
-//        $('#llaveOTPODestino').val("");
-    }
-
-    if (dato.length >= 1 && dato.length >= 31) {
-        $('#llaveOTPODestino').addClass('disabled').attr('disabled', false);
-        $('#llaveOTPODestino2').addClass('disabled').attr('disabled', false);
-    } else {
         $('#llaveOTPODestino2').addClass('disabled').attr('disabled', true);
-        $('#llaveOTPODestino2').val("");
+    } else {
+        if (dato.length >= 1 && dato.length <= 30) {
+            $('#llaveOTPODestino').addClass('disabled').attr('disabled', false);
+        } else {
+            $('#llaveOTPODestino').addClass('disabled').attr('disabled', true);
+//        $('#llaveOTPODestino').val("");
+        }
+
+        if (dato.length >= 1 && dato.length >= 31) {
+            $('#llaveOTPODestino').addClass('disabled').attr('disabled', false);
+            $('#llaveOTPODestino2').addClass('disabled').attr('disabled', false);
+        } else {
+            $('#llaveOTPODestino2').addClass('disabled').attr('disabled', true);
+            $('#llaveOTPODestino2').val("");
+        }
     }
 }
 

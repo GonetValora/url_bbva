@@ -91,16 +91,15 @@ public class ServletUrls extends HttpServlet {
             case UrlCopias:
                 DaoCopias daoCopia = new DaoCopias();
                 String origenTxt = request.getParameter("origenTxt");
-                
+
                 String llaveOTPOrigen = request.getParameter("llaveOTPOrigen");
                 String llaveOTPOrigen2 = request.getParameter("llaveOTPOrigen2");
-                
-                
+
                 String destinoTxt = request.getParameter("destinoTxt");
 
                 String llaveOTPODestino = request.getParameter("llaveOTPODestino");
                 String llaveOTPODestino2 = request.getParameter("llaveOTPODestino2");
-                
+
                 
                 String resorigenTxt;
                 if (origenTxt.length() >= 30) {
@@ -108,23 +107,25 @@ public class ServletUrls extends HttpServlet {
                 } else {
                     resorigenTxt = origenTxt;
                 }
+                listadoRespuestas.add(0, daoCopia.consultaDeCopiasOrigen(resorigenTxt, llaveOTPOrigen, "00000001"));
 
-
-
+                
+                
+                if (llaveOTPOrigen2.length() > 0) {
+                    String resorigenTxt2 = origenTxt.substring(30, origenTxt.length());
+                    listadoRespuestas.add(0, daoCopia.consultaDeCopiasOrigen(resorigenTxt2, llaveOTPOrigen2, "00000002"));
+                }
+                
+                
                 String resdestinoTxt;
                 if (destinoTxt.length() >= 30) {
                     resdestinoTxt = destinoTxt.substring(0, 30);
                 } else {
                     resdestinoTxt = destinoTxt;
                 }
-
-                listadoRespuestas.add(0, daoCopia.consultaDeCopiasOrigen(resorigenTxt, llaveOTPOrigen, "00000001"));
-                if (llaveOTPOrigen2.length() > 0) {
-                    String resorigenTxt2 = origenTxt.substring(30, origenTxt.length());
-                    listadoRespuestas.add(0, daoCopia.consultaDeCopiasOrigen(resorigenTxt2, llaveOTPOrigen2, "00000002"));
-                }
-
                 listadoRespuestas.add(0, daoCopia.consultaDeCopiasDestino(resdestinoTxt, llaveOTPODestino, "00000001"));
+
+
                 if (llaveOTPODestino2.length() > 0) {
                     String resdestinoTxt2 = destinoTxt.substring(30, destinoTxt.length());
                     listadoRespuestas.add(0, daoCopia.consultaDeCopiasDestino(resdestinoTxt2, llaveOTPODestino2, "00000002"));

@@ -112,9 +112,9 @@
                                         <input type="hidden" value="1" id="opcion" name="opcion">
                                         <div class="col-md-6">
                                             <label>Número de Usuario:</label>
-                                            <div class="input-group col-md-6">
+                                            <div class="input-group col-md-4">
                                                 <span class="input-group-addon" id=""></span>
-                                                <input minlength="1" maxlength="4" id="usuariotxt" name="usuariotxt" type="text" class="form-control text-uppercase" placeholder="Número de Usuario" aria-describedby="">
+                                                <input minlength="1" maxlength="4" id="usuariotxt" name="usuariotxt" type="text" class="form-control text-uppercase" placeholder="Número" aria-describedby="">
                                             </div>
                                             <br>
                                             <label>Numero de Peticiones:</label>
