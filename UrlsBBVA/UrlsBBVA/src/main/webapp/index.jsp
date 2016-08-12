@@ -339,33 +339,44 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="fa fa-qrcode fa-fw"></i> Area GRID</h3>
+
+                                <div class="wrapper1">
+                                    <div class="div1"></div>
                                 </div>
+                                <div class="wrapper2">
+                                    <div class="div2">
 
-                                <div class="panel-body table-responsive" id="contenedorTabla" name="contenedorTabla">
 
-                                    <table id="tablaOperaciones" class="display table table-sm">
-                                        <thead>
-                                            <tr>
-                                                <th>Fecha</th>
-                                                <th>Tipo</th>
-                                                <th>URL</th>
-                                                <th>Data</th>
-                                            </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Fecha</th>
-                                                <th>Tipo</th>
-                                                <th>URL</th>
-                                                <th>Data</th>
-                                            </tr>
-                                        </tfoot>
-                                        <tbody id="cuerpotablaOperaciones"></tbody>
-                                    </table>
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title"><i class="fa fa-qrcode fa-fw"></i> Area GRID</h3>
+                                        </div>
 
+                                        <div class="panel-body table-responsive" id="contenedorTabla" name="contenedorTabla">
+
+                                            <table id="tablaOperaciones" class="display table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Fecha</th>
+                                                        <th>Tipo</th>
+                                                        <th>URL</th>
+                                                        <th>Data</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>Fecha</th>
+                                                        <th>Tipo</th>
+                                                        <th>URL</th>
+                                                        <th>Data</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody id="cuerpotablaOperaciones"></tbody>
+                                            </table>
+                                        </div>
+                                        <!-- Content Here -->
+                                    </div>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>

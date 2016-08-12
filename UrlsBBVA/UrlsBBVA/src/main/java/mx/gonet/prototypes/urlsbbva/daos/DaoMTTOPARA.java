@@ -31,7 +31,7 @@ public class DaoMTTOPARA {
             String fecha;
             SimpleDateFormat formatter;
 
-            formatter = new SimpleDateFormat("yyyy-MMMMM-dd hh:mm:ss aaa");
+            formatter = new SimpleDateFormat("hh:mm:ss aaa yyyy-MMMMM-dd");
             today = new Date();
             fecha = formatter.format(today);
 

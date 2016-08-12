@@ -46,7 +46,7 @@ $(document).ready(function () {
         format: "dd-mm-yyyy",
         language: "es",
         autoclose: true
-    }); 
+    });
 });
 
 function maxnum100() {
@@ -73,8 +73,19 @@ function maxnum100() {
 $('input').on('keyup', function (event)
 {
     var cadena = $('#' + event.currentTarget.id + '').val();
-    $(this).val(cadena.replace(" ", ""));
+    $(this).val(cadena.replace("..", ".").trim());
 });
+
+
+function soloLetras(e) {
+    key = e.keyCode || e.which;
+
+    if ((key >= 48 && key <= 57) || (key >= 65 && key <= 90) || (key >= 97 && key <= 122)) {
+
+    } else {
+
+    }
+}
 
 
 function refresh() {
@@ -147,15 +158,6 @@ function refreshDatos() {
     $('#llaveOTPODestino2').addClass('disabled').attr('disabled', true);
 }
 
-function soloLetras(e) {
-    key = e.keyCode || e.which;
-
-    if ((key >= 48 && key <= 57) || (key >= 65 && key <= 90) || (key >= 97 && key <= 122)) {
-
-    } else {
-
-    }
-}
 
 function llaveOTPOrigenTam() {
 
@@ -512,10 +514,7 @@ function consultaCopia() {
                 $("#containerDiv").show();
             }
         });
-    }
-
-
-    else if (mensaje.length === 0 && valiOTP === true && ($('#llaveOTPOrigen2').prop("disabled") === true) === true && valiOTP2 === true && valiOTP4 === true) {
+    } else if (mensaje.length === 0 && valiOTP === true && ($('#llaveOTPOrigen2').prop("disabled") === true) === true && valiOTP2 === true && valiOTP4 === true) {
 //        0 a 30 lanzar con 2
 //        31 0 mas lanza con 3
 //        31 0  mas lanza con 4
@@ -558,9 +557,7 @@ function consultaCopia() {
                 $("#containerDiv").show();
             }
         });
-    }
-
-    else if (mensaje.length === 0 && valiOTP === true && valiOTP3 === true && valiOTP2 === true && ($('#llaveOTPODestino2').prop("disabled") === false) === false) {
+    } else if (mensaje.length === 0 && valiOTP === true && valiOTP3 === true && valiOTP2 === true && ($('#llaveOTPODestino2').prop("disabled") === false) === false) {
 //        0 a 30 lanzar con 2
 //        31 0 mas lanza con 3
 //        31 0  mas lanza con 4
@@ -603,9 +600,7 @@ function consultaCopia() {
                 $("#containerDiv").show();
             }
         });
-    }
-
-    else if (mensaje.length === 0 && valiOTP === true && valiOTP2 === true && ($('#llaveOTPOrigen2').prop("disabled") === false) === false && ($('#llaveOTPODestino2').prop("disabled") === false) === false) {
+    } else if (mensaje.length === 0 && valiOTP === true && valiOTP2 === true && ($('#llaveOTPOrigen2').prop("disabled") === false) === false && ($('#llaveOTPODestino2').prop("disabled") === false) === false) {
 //        0 a 30 lanzar con 2
 //        31 0 mas lanza con 3
 //        31 0  mas lanza con 4
@@ -677,3 +672,12 @@ function consultaCopia() {
 //        }
 //    });
 //}
+
+$(function () {
+    $(".wrapper1").scroll(function () {
+        $(".wrapper2").scrollLeft($(".wrapper1").scrollLeft());
+    });
+    $(".wrapper2").scroll(function () {
+        $(".wrapper1").scrollLeft($(".wrapper2").scrollLeft());
+    });
+});
