@@ -345,7 +345,7 @@
 
                                 <div class="panel-body table-responsive" id="contenedorTabla" name="contenedorTabla">
 
-                                    <table id="tablaOperaciones" class="display table">
+                                    <table id="tablaOperaciones" class="display table table-sm">
                                         <thead>
                                             <tr>
                                                 <th>Fecha</th>

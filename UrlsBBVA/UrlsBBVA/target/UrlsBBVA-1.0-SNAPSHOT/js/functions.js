@@ -46,7 +46,7 @@ $(document).ready(function () {
         format: "dd-mm-yyyy",
         language: "es",
         autoclose: true
-    });
+    }); 
 });
 
 function maxnum100() {
@@ -70,7 +70,11 @@ function maxnum100() {
 //        $("#datoTxt").removeClass('text-uppercase');
 //    }
 //});
-
+$('input').on('keyup', function (event)
+{
+    var cadena = $('#' + event.currentTarget.id + '').val();
+    $(this).val(cadena.replace(" ", ""));
+});
 
 
 function refresh() {
@@ -234,7 +238,7 @@ function ValidarOtp(dato) {
 
 function consultaPorPeticion() {
     var context = $('#contexto').val();
-    var user = $('#usuariotxt').val().trim().toUpperCase();
+    var user = $('#usuariotxt').val().toUpperCase();
     var selectNumPeticiones = $('#selectNumPeticiones').val();
     if (user.length > 0 && parseInt(selectNumPeticiones)) {
         $.ajax({
@@ -278,11 +282,11 @@ function consultaPorPeticion() {
 
 function consultaPorOTP() {
     var context = $('#contexto').val();
-    var llaveOTPtxt = $('#llaveOTPtxt').val().trim();
+    var llaveOTPtxt = $('#llaveOTPtxt').val();
     var valiOTP = ValidarOtp(llaveOTPtxt);
     var selTipo = $('#selTipo').val();
-    var parametrotxt = $('#parametrotxt').val() === "OTRO" ? $('#otrotxt').val().trim() : $('#parametrotxt').val();
-    var datepickerD = $('#datepickerD').val().trim();
+    var parametrotxt = $('#parametrotxt').val() === "OTRO" ? $('#otrotxt').val() : $('#parametrotxt').val();
+    var datepickerD = $('#datepickerD').val();
 
     var mensaje = llaveOTPtxt.length > 0 ?
             parametrotxt.length > 0 ?
@@ -337,14 +341,14 @@ function consultaPorOTP() {
 
 function consultaMTTOPARA() {
     var context = $('#contexto').val();
-    var llaveOTP = $('#llaveOTP').val().trim();
+    var llaveOTP = $('#llaveOTP').val();
     var valiOTP = ValidarOtp(llaveOTP);
     var tipoAccion = $('#tipoAccion').val();
-    var idTxt = $('#idTxt').val().trim();
-    var tipoAccion2 = $('#tipoAccion2').val().trim();
-    var secuenciaTxt = $('#secuenciaTxt').val().trim();
-    var datoTxt = $('#datoTxt').val().trim();
-    var statTxt = $('#statTxt').val().trim();
+    var idTxt = $('#idTxt').val();
+    var tipoAccion2 = $('#tipoAccion2').val();
+    var secuenciaTxt = $('#secuenciaTxt').val();
+    var datoTxt = $('#datoTxt').val();
+    var statTxt = $('#statTxt').val();
 
     var mensaje = llaveOTP.length > 0 ?
             idTxt.length > 0 ?
@@ -406,17 +410,17 @@ function consultaMTTOPARA() {
 
 function consultaCopia() {
     var context = $('#contexto').val();
-    var origenTxt = $('#origenTxt').val().trim().toUpperCase();
-    var llaveOTPOrigen = $('#llaveOTPOrigen').val().trim();
+    var origenTxt = $('#origenTxt').val().toUpperCase();
+    var llaveOTPOrigen = $('#llaveOTPOrigen').val();
     var valiOTP = ValidarOtp(llaveOTPOrigen);
 
 
     var llaveOTPOrigen2;
     var valiOTP3;
     if ($('#llaveOTPOrigen2').prop("disabled") === false) {
-        llaveOTPOrigen2 = $('#llaveOTPOrigen2').val().trim();
+        llaveOTPOrigen2 = $('#llaveOTPOrigen2').val();
         if (llaveOTPOrigen2.length > 0 && llaveOTPOrigen2.length <= 20) {
-            llaveOTPOrigen2 = $('#llaveOTPOrigen2').val().trim();
+            llaveOTPOrigen2 = $('#llaveOTPOrigen2').val();
             valiOTP3 = ValidarOtp(llaveOTPOrigen2);
             if (valiOTP3 === false) {
                 alert("La Segunda Llave OTP Origen no cumple con el formato numerico de 20 digitos");
@@ -430,17 +434,17 @@ function consultaCopia() {
     }
 
 
-    var destinoTxt = $('#destinoTxt').val().trim().toUpperCase();
-    var llaveOTPODestino = $('#llaveOTPODestino').val().trim();
+    var destinoTxt = $('#destinoTxt').val().toUpperCase();
+    var llaveOTPODestino = $('#llaveOTPODestino').val();
     var valiOTP2 = ValidarOtp(llaveOTPODestino);
 
     var llaveOTPODestino2;
     var valiOTP4;
 
     if ($('#llaveOTPODestino2').prop("disabled") === false) {
-        llaveOTPODestino2 = $('#llaveOTPODestino2').val().trim();
+        llaveOTPODestino2 = $('#llaveOTPODestino2').val();
         if (llaveOTPODestino2.length > 0 && llaveOTPODestino2.length <= 20) {
-            llaveOTPODestino2 = $('#llaveOTPODestino2').val().trim();
+            llaveOTPODestino2 = $('#llaveOTPODestino2').val();
             valiOTP4 = ValidarOtp(llaveOTPODestino2);
             if (valiOTP4 === false) {
                 alert("La Segunda Llave OTP Destino no cumple con el formato numerico de 20 digitos");
@@ -452,7 +456,7 @@ function consultaCopia() {
     } else {
         llaveOTPODestino2 = "";
     }
-//    var llaveOTPODestino2 = $('#llaveOTPODestino2').val().trim();
+//    var llaveOTPODestino2 = $('#llaveOTPODestino2').val();
 
     var mensaje =
             origenTxt.length > 0 ?
@@ -511,7 +515,7 @@ function consultaCopia() {
     }
 
 
-    if (mensaje.length === 0 && valiOTP === true && ($('#llaveOTPOrigen2').prop("disabled") === true) === true && valiOTP2 === true && valiOTP4 === true) {
+    else if (mensaje.length === 0 && valiOTP === true && ($('#llaveOTPOrigen2').prop("disabled") === true) === true && valiOTP2 === true && valiOTP4 === true) {
 //        0 a 30 lanzar con 2
 //        31 0 mas lanza con 3
 //        31 0  mas lanza con 4
@@ -556,7 +560,7 @@ function consultaCopia() {
         });
     }
 
-    if (mensaje.length === 0 && valiOTP === true && valiOTP3 === true && valiOTP2 === true && ($('#llaveOTPODestino2').prop("disabled") === false) === false) {
+    else if (mensaje.length === 0 && valiOTP === true && valiOTP3 === true && valiOTP2 === true && ($('#llaveOTPODestino2').prop("disabled") === false) === false) {
 //        0 a 30 lanzar con 2
 //        31 0 mas lanza con 3
 //        31 0  mas lanza con 4
@@ -601,11 +605,7 @@ function consultaCopia() {
         });
     }
 
-
-
-
-
-    if (mensaje.length === 0 && valiOTP === true && valiOTP2 === true && ($('#llaveOTPOrigen2').prop("disabled") === false) === false && ($('#llaveOTPODestino2').prop("disabled") === false) === false) {
+    else if (mensaje.length === 0 && valiOTP === true && valiOTP2 === true && ($('#llaveOTPOrigen2').prop("disabled") === false) === false && ($('#llaveOTPODestino2').prop("disabled") === false) === false) {
 //        0 a 30 lanzar con 2
 //        31 0 mas lanza con 3
 //        31 0  mas lanza con 4
@@ -651,9 +651,6 @@ function consultaCopia() {
     } else {
         alert(mensaje);
     }
-
-
-
 
 }
 
