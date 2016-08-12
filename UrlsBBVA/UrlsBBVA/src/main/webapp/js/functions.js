@@ -108,7 +108,9 @@ function refresh() {
                     + '<tfoot><tr><th>Fecha</th><th>Tipo</th><th>URL</th><th>Data</th></tr></tfoot>'
                     + '</table>';
             $('#contenedorTabla').append(cuerpoT);
-            $('#tablaOperaciones').dataTable();
+            $('#tablaOperaciones').dataTable({
+                "order": []
+            });
             refreshDatos();
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -122,11 +124,30 @@ function refresh() {
                     + '<tfoot><tr><th>Fecha</th><th>Tipo</th><th>URL</th><th>Data</th></tr></tfoot>'
                     + '</table>';
             $('#contenedorTabla').append(cuerpoT);
-            $('#tablaOperaciones').dataTable();
+            $('#tablaOperaciones').dataTable({
+                "order": []
+            });
             refreshDatos();
         }
     });
 }
+
+function justNumbers(e) {
+    var keynum = window.event ? window.event.keyCode : e.which;
+    if ((keynum === 8))
+        return true;
+
+    return /\d/.test(String.fromCharCode(keynum));
+}
+
+function noSpaces(e) {
+    var keynum = window.event ? window.event.keyCode : e.which;
+    if ((keynum !== 32))
+        return true;
+
+    return /\d/.test(String.fromCharCode(keynum));
+}
+
 function refreshDatos() {
     $('#usuariotxt').val("");
     $('#selectNumPeticiones').val("1");
@@ -162,18 +183,20 @@ function refreshDatos() {
 function llaveOTPOrigenTam() {
 
     var dato = document.getElementById("origenTxt").value;
+    var res = dato.replace(" ", "");
+    $('#origenTxt').val(res);
+    dato = res;
     if (dato.match("([^a-zA-Z0-9_ ])+([^a-zA-Z0-9_ ])") !== null) {
         alert("El formato no puede contener dos o más puntos seguidos");
         $('#llaveOTPOrigen').addClass('disabled').attr('disabled', true);
         $('#llaveOTPOrigen2').addClass('disabled').attr('disabled', true);
     } else {
-        if (dato.length >= 1 && dato.length <= 30) {
+        if (dato.length > 0 && dato.length <= 30) {
             $('#llaveOTPOrigen').addClass('disabled').attr('disabled', false);
         } else {
             $('#llaveOTPOrigen').addClass('disabled').attr('disabled', true);
-//        $('#llaveOTPOrigen').val("");
         }
-        if (dato.length >= 1 && dato.length >= 31) {
+        if (dato.length > 30) {
             $('#llaveOTPOrigen').addClass('disabled').attr('disabled', false);
             $('#llaveOTPOrigen2').addClass('disabled').attr('disabled', false);
         } else {
@@ -185,19 +208,20 @@ function llaveOTPOrigenTam() {
 
 function llaveOTPDestinoTam() {
     var dato = document.getElementById("destinoTxt").value;
+    var res = dato.replace(" ", "");
+    $('#destinoTxt').val(res);
+    dato = res;
     if (dato.match("([^a-zA-Z0-9_ ])+([^a-zA-Z0-9_ ])") !== null) {
         alert("El formato no puede contener dos o más puntos seguidos");
         $('#llaveOTPODestino').addClass('disabled').attr('disabled', true);
         $('#llaveOTPODestino2').addClass('disabled').attr('disabled', true);
     } else {
-        if (dato.length >= 1 && dato.length <= 30) {
+        if (dato.length >0 && dato.length <= 30) {
             $('#llaveOTPODestino').addClass('disabled').attr('disabled', false);
         } else {
             $('#llaveOTPODestino').addClass('disabled').attr('disabled', true);
-//        $('#llaveOTPODestino').val("");
         }
-
-        if (dato.length >= 1 && dato.length >= 31) {
+        if (dato.length > 30) {
             $('#llaveOTPODestino').addClass('disabled').attr('disabled', false);
             $('#llaveOTPODestino2').addClass('disabled').attr('disabled', false);
         } else {
@@ -264,7 +288,9 @@ function consultaPorPeticion() {
                             + "<td class='text-center'>" + data[BuscadorObjeto].data + "</td></tr>"
                 }
                 $('#tablaOperaciones').append(cuerpoT + '</tbody>');
-                $('#tablaOperaciones').dataTable();
+                $('#tablaOperaciones').dataTable({
+                    "order": []
+                });
             },
             error: function (jqXHR, textStatus, errorThrown) {
             },
@@ -322,7 +348,9 @@ function consultaPorOTP() {
                             + "<td class='text-center'>" + data[BuscadorObjeto].data + "</td></tr>"
                 }
                 $('#tablaOperaciones').append(cuerpoT + '</tbody>');
-                $('#tablaOperaciones').dataTable();
+                $('#tablaOperaciones').dataTable({
+                    "order": []
+                });
             },
             error: function (jqXHR, textStatus, errorThrown) {
             },
@@ -392,7 +420,9 @@ function consultaMTTOPARA() {
                             + "<td class='text-center'>" + data[BuscadorObjeto].data + "</td></tr>"
                 }
                 $('#tablaOperaciones').append(cuerpoT + '</tbody>');
-                $('#tablaOperaciones').dataTable();
+                $('#tablaOperaciones').dataTable({
+                    "order": []
+                });
             },
             error: function (jqXHR, textStatus, errorThrown) {
             },
@@ -501,7 +531,9 @@ function consultaCopia() {
                             + "<td class='text-center'>" + data[BuscadorObjeto].data + "</td></tr>"
                 }
                 $('#tablaOperaciones').append(cuerpoT + '</tbody>');
-                $('#tablaOperaciones').dataTable();
+                $('#tablaOperaciones').dataTable({
+                    "order": []
+                });
             },
             error: function (jqXHR, textStatus, errorThrown) {
             },
@@ -544,7 +576,9 @@ function consultaCopia() {
                             + "<td class='text-center'>" + data[BuscadorObjeto].data + "</td></tr>"
                 }
                 $('#tablaOperaciones').append(cuerpoT + '</tbody>');
-                $('#tablaOperaciones').dataTable();
+                $('#tablaOperaciones').dataTable({
+                    "order": []
+                });
             },
             error: function (jqXHR, textStatus, errorThrown) {
             },
@@ -587,7 +621,9 @@ function consultaCopia() {
                             + "<td class='text-center'>" + data[BuscadorObjeto].data + "</td></tr>"
                 }
                 $('#tablaOperaciones').append(cuerpoT + '</tbody>');
-                $('#tablaOperaciones').dataTable();
+                $('#tablaOperaciones').dataTable({
+                    "order": []
+                });
             },
             error: function (jqXHR, textStatus, errorThrown) {
             },
@@ -630,7 +666,9 @@ function consultaCopia() {
                             + "<td class='text-center'>" + data[BuscadorObjeto].data + "</td></tr>"
                 }
                 $('#tablaOperaciones').append(cuerpoT + '</tbody>');
-                $('#tablaOperaciones').dataTable();
+                $('#tablaOperaciones').dataTable({
+                    "order": []
+                });
             },
             error: function (jqXHR, textStatus, errorThrown) {
             },
