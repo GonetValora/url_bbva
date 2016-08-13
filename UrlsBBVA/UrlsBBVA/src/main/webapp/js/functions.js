@@ -49,6 +49,19 @@ $(document).ready(function () {
     });
 });
 
+function validarSiNumero(id) {
+    var valor = $('#' + id).val();
+    valor=valor.toLowerCase();
+    var letras = "abcdefghyjklmnñopqrstuvwxyz.,-_#+*^><";
+    for (var i = 0; i < valor.length; i++) {
+        if (letras.indexOf(valor.charAt(i), 0) != -1) {
+            alert("La llave solo debe contener digitos")
+            return $('#' + id).val("");
+        }
+    }
+}
+
+
 function maxnum100() {
     var numero = $('#selectNumPeticiones').val();
     if (numero > 100) {
@@ -70,10 +83,21 @@ function maxnum100() {
 //        $("#datoTxt").removeClass('text-uppercase');
 //    }
 //});
+var cont = 0;
 $('input').on('keyup', function (event)
 {
-    var cadena = $('#' + event.currentTarget.id + '').val();
-    $(this).val(cadena.replace("..", ".").trim());
+    var keynum = window.event ? window.event.keyCode : e.which;
+    if ((keynum === 190)) {
+        var cadena = $('#' + event.currentTarget.id + '').val();
+        $('#' + event.currentTarget.id + '').val(cadena.replace("..", ".").trim());
+    }
+
+    if (event.currentTarget.id === "origenTxt" || event.currentTarget.id === "destinoTxt") {
+        if ((keynum === 32)) {
+            var cadena = $('#' + event.currentTarget.id + '').val();
+            $('#' + event.currentTarget.id + '').val(cadena.replace(" ", "").trim());
+        }
+    }
 });
 
 
@@ -181,11 +205,7 @@ function refreshDatos() {
 
 
 function llaveOTPOrigenTam() {
-
     var dato = document.getElementById("origenTxt").value;
-    var res = dato.replace(" ", "");
-    $('#origenTxt').val(res);
-    dato = res;
     if (dato.match("([^a-zA-Z0-9_ ])+([^a-zA-Z0-9_ ])") !== null) {
         alert("El formato no puede contener dos o más puntos seguidos");
         $('#llaveOTPOrigen').addClass('disabled').attr('disabled', true);
@@ -208,15 +228,12 @@ function llaveOTPOrigenTam() {
 
 function llaveOTPDestinoTam() {
     var dato = document.getElementById("destinoTxt").value;
-    var res = dato.replace(" ", "");
-    $('#destinoTxt').val(res);
-    dato = res;
     if (dato.match("([^a-zA-Z0-9_ ])+([^a-zA-Z0-9_ ])") !== null) {
         alert("El formato no puede contener dos o más puntos seguidos");
         $('#llaveOTPODestino').addClass('disabled').attr('disabled', true);
         $('#llaveOTPODestino2').addClass('disabled').attr('disabled', true);
     } else {
-        if (dato.length >0 && dato.length <= 30) {
+        if (dato.length > 0 && dato.length <= 30) {
             $('#llaveOTPODestino').addClass('disabled').attr('disabled', false);
         } else {
             $('#llaveOTPODestino').addClass('disabled').attr('disabled', true);

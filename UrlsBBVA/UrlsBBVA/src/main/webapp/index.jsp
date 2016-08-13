@@ -154,7 +154,7 @@
                                             <label>Llave OTP:</label>
                                             <div class="input-group col-md-7">
                                                 <span class="input-group-addon" id=""></span>
-                                                <input minlength="20" maxlength="20" name="llaveOTPtxt" id="llaveOTPtxt" type="text" onpaste="return false" onkeypress="return justNumbers(event);" class="form-control text-uppercase" placeholder="Llave OTP" aria-describedby="">
+                                                <input minlength="20" maxlength="20" onchange="validarSiNumero(this.id);"  name="llaveOTPtxt" id="llaveOTPtxt" type="text"  onkeypress="return justNumbers(event);" class="form-control text-uppercase" placeholder="Llave OTP" aria-describedby="">
                                             </div>
                                             <br>
 
@@ -205,7 +205,7 @@
                                             <label>Llave OTP:</label>
                                             <div class="input-group col-md-7">
                                                 <span class="input-group-addon" id=""></span>
-                                                <input minlength="20" maxlength="20" name="llaveOTP" id="llaveOTP" type="text" onpaste="return false" onkeypress="return justNumbers(event);" class="form-control text-uppercase" placeholder="Llave OTP" aria-describedby="">
+                                                <input minlength="20" maxlength="20" onchange="validarSiNumero(this.id);" name="llaveOTP" id="llaveOTP" type="text" onkeypress="return justNumbers(event);" class="form-control text-uppercase" placeholder="Llave OTP" aria-describedby="">
                                             </div>
                                             <br>
 
@@ -279,14 +279,14 @@
                                             <label>Archivo Origen:</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon" id=""></span>
-                                                <input onkeyup="llaveOTPOrigenTam();" onpaste="return false"  minlength="1" maxlength="44" name="origenTxt" id="origenTxt" type="text" class="form-control text-uppercase" placeholder="Archivo Origen" aria-describedby="">
+                                                <input onkeyup="llaveOTPOrigenTam();"  onchange="llaveOTPOrigenTam();" minlength="1" maxlength="44" name="origenTxt" id="origenTxt" type="text" class="form-control text-uppercase" placeholder="Archivo Origen" aria-describedby="">
                                             </div>
                                             <br>
 
                                             <label>Llave OTP Origen:</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon" id=""></span>
-                                                <input disabled="true" minlength="20" onpaste="return false" onkeypress="return justNumbers(event);" maxlength="20" name="llaveOTPOrigen" id="llaveOTPOrigen" type="text" class="form-control" placeholder="Llave OTP Origen" aria-describedby="">
+                                                <input disabled="true" minlength="20"  onchange="validarSiNumero(this.id);" onkeypress="return justNumbers(event);" maxlength="20" name="llaveOTPOrigen" id="llaveOTPOrigen" type="text" class="form-control" placeholder="Llave OTP Origen" aria-describedby="">
                                             </div>
                                             <br>
 
@@ -294,7 +294,7 @@
                                                 <label>Segunda Llave OTP Origen:</label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon" id=""></span>
-                                                    <input disabled="true" minlength="20" onpaste="return false" onkeypress="return justNumbers(event);" maxlength="20" name="llaveOTPOrigen2" id="llaveOTPOrigen2" type="text" class="form-control" placeholder="Segunda Llave OTP Origen" aria-describedby="">
+                                                    <input disabled="true" minlength="20" onchange="validarSiNumero(this.id);" onkeypress="return justNumbers(event);" maxlength="20" name="llaveOTPOrigen2" id="llaveOTPOrigen2" type="text" class="form-control" placeholder="Segunda Llave OTP Origen" aria-describedby="">
                                                 </div>
                                                 <br>  
                                             </div>
@@ -303,14 +303,14 @@
                                             <label>Archivo Destino:</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon" id=""></span>
-                                                <input onkeyup="llaveOTPDestinoTam()" onpaste="return false" minlength="1" maxlength="44" name="destinoTxt" id="destinoTxt" type="text" class="form-control text-uppercase" placeholder="Archivo Destino" aria-describedby="">
+                                                <input onkeyup="llaveOTPDestinoTam()" onchange="llaveOTPDestinoTam()"  minlength="1" maxlength="44" name="destinoTxt" id="destinoTxt" type="text" class="form-control text-uppercase" placeholder="Archivo Destino" aria-describedby="">
                                             </div>
                                             <br>
 
                                             <label>Llave OTP Destino:</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon" id=""></span>
-                                                <input disabled="true" minlength="20" onpaste="return false" onkeypress="return justNumbers(event);" maxlength="20" name="llaveOTPODestino" id="llaveOTPODestino" type="text" class="form-control" placeholder="Llave OTP Destino" aria-describedby="">
+                                                <input disabled="true" minlength="20"  onchange="validarSiNumero(this.id);" onkeypress="return justNumbers(event);" maxlength="20" name="llaveOTPODestino" id="llaveOTPODestino" type="text" class="form-control" placeholder="Llave OTP Destino" aria-describedby="">
                                             </div>
                                             <br>
 
@@ -318,7 +318,7 @@
                                                 <label>Segunda Llave OTP Destino:</label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon" id=""></span>
-                                                    <input disabled="true" minlength="20" onpaste="return false" onkeypress="return justNumbers(event);" maxlength="20" name="llaveOTPODestino2" id="llaveOTPODestino2" type="text" class="form-control" placeholder="Segunda Llave OTP Destino" aria-describedby="">
+                                                    <input disabled="true" minlength="20"  onchange="validarSiNumero(this.id);" onkeypress="return justNumbers(event);" maxlength="20" name="llaveOTPODestino2" id="llaveOTPODestino2" type="text" class="form-control" placeholder="Segunda Llave OTP Destino" aria-describedby="">
                                                 </div>
                                                 <br>  
                                             </div>
